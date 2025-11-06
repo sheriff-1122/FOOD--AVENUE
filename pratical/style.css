@@ -66,17 +66,16 @@ a {
   color: yellowgreen;
 }
 
-@media (max-width: 600px) {
-  nav a {
-    font-size: 14px;
-    white-space: nowrap; /* keep words whole */
+ @media (max-width: 600px) {
+  .navbar a {
+    font-size: 13px !important;
   }
 
-  nav ul {
-    gap: 12px; /* give links space so they don’t crush */
+  .navbar ul {
+    gap: 10px !important;
   }
 }
- 
+
 
 h1 {
   font-size: 2.5em;
