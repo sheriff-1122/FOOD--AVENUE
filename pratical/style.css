@@ -18,23 +18,24 @@ a {
 
 .navbar {
   background-color: #e65f05;
-  padding:10px 20;
+  padding:20px 0;
   position:fixed;
   z-index: 10;
   width:100%;   
   align-items: center;
-  justify-content: space-between;
   top: 0;
   left: 0;
-  flex-wrap: wrap;
+  
 }
 
 .navbar ul {
   list-style: none;
   margin: 0;
-  gap: 20px;
+  gap: 80px;
   padding: 0;
-  display: flex;
+  display:flex;
+  justify-content: center;
+  align-items: center;
   
 }
 
@@ -54,10 +55,9 @@ a {
   color: yellowgreen;
 }
 
-@media (max-width: 600px) {
+ @media (max-width: 600px) {
   nav ul {
-    flex-direction: column;  /* stack links */
-    gap: 10px;
+    flex-direction: column;   /* stack links */
     justify-content: center;
     align-items: center;
     text-align: center;
