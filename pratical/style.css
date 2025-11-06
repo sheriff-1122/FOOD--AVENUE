@@ -68,7 +68,7 @@ a {
   }
 
   nav {
-    width:;
+    position: static;
   }
 }
 
