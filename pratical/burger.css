@@ -55,35 +55,27 @@
      font-size: 15px;
  }
  
- 
-  @media (max-width: 600px) {
-
-  h1 {
-    font-size: 2rem;            /* smaller title */
-    padding: 10px;
-  }
+ @media (max-width: 600px) {
 
   .food-container {
-    flex-direction: column;     /* stack everything vertically */
-    align-items: center;        /* center items */
+    flex-direction: column;
+    align-items: center;
     padding: 15px;
     gap: 20px;
   }
 
   .food-section {
-    width: 90%;                 /* use most of the screen width */
+    width: 90%;
     margin: 15px 0;
     padding: 20px;
   }
 
   .image-part img {
-    width: 100%;                /* make image fit */
-    max-width: 260px;           /* but not too big */
-    height: auto;
-  }
-
-  .text-part p {
-    font-size: 14px;            /* slightly smaller text */
+    width: 100%;
+    height: 200px;        /* give it height so it fills */
+    object-fit: cover;     /* makes it bold and fills the box */
+    border-radius: 15px;
   }
 }
+
 
