@@ -55,20 +55,7 @@ a {
 .navbar a:hover {
   color: yellowgreen;
 }
- @media (max-width: 600px) {
-  .navbar {
-    padding: 12px 0;     /* smaller height */
-  }
-
-  .navbar ul {
-    gap: 10px;           /* smaller spacing */
-  }
-
-  .navbar a {
-    font-size: 14px;     /* smaller text on phones */
-  }
-}
-
+ 
 
 h1 {
   font-size: 2.5em;
