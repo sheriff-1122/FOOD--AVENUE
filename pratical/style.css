@@ -54,14 +54,19 @@ a {
 .navbar a:hover {
   color: yellowgreen;
 }
- 
-@media (max-width: 600px) 
-  nav {
-    flex-direction: column;
-    gap: 10px;
-    padding: 15px 0;
+ @media (max-width: 600px) {
+  nav ul {
+    gap: 10px;          /* smaller spacing */
   }
 
+  nav a {
+    font-size: 14px;    /* slightly smaller text */
+  }
+
+  nav {
+    padding: 8px 12px;  /* reduce navbar height/width */
+  }
+}
 
 .intro {
   padding: 60px 20px;
