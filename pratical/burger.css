@@ -69,13 +69,12 @@
     margin: 15px 0;
     padding: 20px;
   }
-
-  .image-part img {
-    width: 100%;
-    height: 200px;        /* give it height so it fills */
-    object-fit: cover;     /* makes it bold and fills the box */
-    border-radius: 15px;
-  }
+ .image-part img {
+  width: 100%;
+  height: auto;          /* keep original proportions */
+  object-fit: contain;   /* show full image without cropping */
+  border-radius: 15px;
+}
 }
 
 
