@@ -66,16 +66,11 @@ a {
   nav {
     padding: 8px 12px;  /* reduce navbar height/width */
   }
-
-  nav {
-    position: static;
+  .navbar {
+    width: 75%;
   }
 }
-
-.intro {
-  padding: 60px 20px;
-}
-
+ 
 h1 {
   font-size: 2.5em;
   margin-bottom: 10px;
