@@ -1,7 +1,7 @@
 body {
- 
+
   margin: 0;
- background-color: #422801;
+  background-color: #422801;
   background-position: center;
   background-size: cover;
   background-position: center;
@@ -11,6 +11,7 @@ body {
 
 
 }
+
 a {
   text-decoration: none;
   color: blanchedalmond;
@@ -18,14 +19,14 @@ a {
 
 .navbar {
   background-color: #e65f05;
-  padding:20px 0;
-  position:fixed;
+  padding: 20px 0;
+  position: fixed;
   z-index: 10;
-  width:100%;   
+  width: 100%;
   align-items: center;
   top: 0;
   left: 0;
-  
+
 }
 
 .navbar ul {
@@ -33,10 +34,10 @@ a {
   margin: 0;
   gap: 80px;
   padding: 0;
-  display:flex;
+  display: flex;
   justify-content: center;
   align-items: center;
-  
+
 }
 
 .navbar li {
@@ -55,22 +56,20 @@ a {
   color: yellowgreen;
 }
  @media (max-width: 600px) {
-  nav ul {
-    gap: 5px;          /* smaller spacing */
-  }
-
-  nav a {
-    font-size: 14px;    /* slightly smaller text */
-  }
-
-  nav {
-    padding: 8px 12px;  /* reduce navbar height/width */
-  }
   .navbar {
-    width: 75%;
+    padding: 12px 0;     /* smaller height */
+  }
+
+  .navbar ul {
+    gap: 10px;           /* smaller spacing */
+  }
+
+  .navbar a {
+    font-size: 14px;     /* smaller text on phones */
   }
 }
- 
+
+
 h1 {
   font-size: 2.5em;
   margin-bottom: 10px;
@@ -164,7 +163,7 @@ h1 {
   justify-content: center;
   align-items: center;
   align-items: flex-start;
-  gap:200px;
+  gap: 200px;
   flex-wrap: wrap;
   padding: 20px;
 
