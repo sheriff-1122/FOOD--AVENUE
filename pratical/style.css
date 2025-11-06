@@ -78,7 +78,7 @@ a {
   }
 
   .navbar a {
-    font-size: 50px; /* make sure all links fit on small screens */
+    font-size: 15px; /* make sure all links fit on small screens */
   }
 }
 
