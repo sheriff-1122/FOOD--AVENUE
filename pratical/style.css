@@ -8,6 +8,8 @@ body {
   background-repeat: no-repeat;
   background-attachment: scroll;
   text-align: center;
+  
+
   padding-top: 110px;
 
 }
@@ -67,6 +69,7 @@ h1 {
   font-size: 2.5em;
   margin-bottom: 10px;
   color: #e65f05;
+  margin-top: 0;
 }
 
 .subtext {
