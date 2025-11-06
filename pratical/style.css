@@ -66,6 +66,10 @@ a {
   nav {
     padding: 8px 12px;  /* reduce navbar height/width */
   }
+
+  nav {
+    width: fit-content;
+  }
 }
 
 .intro {
