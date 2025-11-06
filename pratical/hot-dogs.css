@@ -71,7 +71,7 @@ h1 {
 
  .image-part img {
   width: 100%;
-  height: auto;          /* keep original proportions */
+  height:100%;          /* keep original proportions */
   object-fit: contain;   /* show full image without cropping */
   border-radius: 15px;
 }
