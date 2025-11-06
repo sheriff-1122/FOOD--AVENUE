@@ -54,15 +54,14 @@ a {
 .navbar a:hover {
   color: yellowgreen;
 }
-
- @media (max-width: 600px) {
-  nav ul {
-    flex-direction: column;   /* stack links */
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+ 
+@media (max-width: 600px) 
+  nav {
+    flex-direction: column;
+    gap: 10px;
+    padding: 15px 0;
   }
-}
+
 
 .intro {
   padding: 60px 20px;
