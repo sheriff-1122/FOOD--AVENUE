@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<!-- saved from url=(0041)http://127.0.0.1:5500/pratical/index.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>PRATICAL PAGE</title>
+   <link rel="stylesheet" href="./PRATICAL PAGE_files/style.css">
+
+</head>
+
+<body>
+   <nav class="navbar">
+      <ul>
+         <li><a href="http://127.0.0.1:5500/pratical/index.html#">Home</a></li>
+         <li><a href="http://127.0.0.1:5500/pratical/index.html#">About</a></li>
+         <li><a href="http://127.0.0.1:5500/pratical/index.html#">Contact</a></li>
+      </ul>
+   </nav>
+
+   <section class="intro">
+      <h1>Welcome to Food Avenue</h1>
+      <p class="subtext">Where every bite is a journey of flavor! Discover mouthwatering dishes, fresh ingredients, and
+         a passion for good food all in one place.</p>
+      <div class="slideshow">
+         <div class="slide"><img src="./PRATICAL PAGE_files/The-burger 3.jpg" alt="Food 1"></div>
+         <div class="slide"><img src="./PRATICAL PAGE_files/food-3.jpg" alt="Food 3"></div>
+         <div class="slide"><img src="./PRATICAL PAGE_files/Food-4.jpg" alt="Food-4"></div>
+         <div class="slide"><img src="./PRATICAL PAGE_files/Hot-dog 2.jpg" alt="food 2"></div>
+      </div>
+      <p class="description">
+         At Food Avenue, we bring together taste, creativity, and freshness to serve dishes that satisfy your cravings
+         and warm your heart. Every meal is crafted with passion, using the finest ingredients to give you a truly
+         unforgettable experience. Explore our latest delicacies.
+      </p>
+
+   </section>
+
+   <div class="food-container">
+      <section class="food-section">
+         <div class="image-part">
+            <img src="./PRATICAL PAGE_files/burger 1.jpg" alt="burger">
+         </div>
+
+         <div class="text-part">
+            <h2><a href="http://127.0.0.1:5500/pratical/fresh-burger.html">FRESH BURGER 🍔</a></h2>
+            <p>We craft each dish using fresh ingredients from local farms</p>
+         </div>
+      </section>
+
+      <section class="food-section">
+         <div class="image-part">
+            <img src="./PRATICAL PAGE_files/pizza.jpg" alt="Fresh pizza">
+         </div>
+
+         <div class="text-part">
+            <h2><a href="http://127.0.0.1:5500/pratical/the-pizza.html">PIZZA 🍕</a></h2>
+            <p>Fresh dough, rich cheese,and bold flavour baked to perfection - one bite and you’ll be craving more. </p>
+         </div>
+      </section>
+
+
+      <section class="food-section">
+         <div class="image-part">
+            <img src="./PRATICAL PAGE_files/Hot-dog.jpg" alt="burger">
+         </div>
+
+         <div class="text-part">
+            <h2><a href="http://127.0.0.1:5500/pratical/hot-dog.html">HOTDOG 🌭</a></h2>
+            <p>our hotdogs 🌭are crafted to bring you that perfect bite — soft, warm buns wrapped around juicy,
+               flavorful sausages.👌🏻😉</p>
+         </div>
+      </section>
+
+      <section class="food-section">
+         <div class="image-part">
+            <img src="./PRATICAL PAGE_files/CHICKEN.jpg" alt="Chicken">
+         </div>
+
+         <div class="text-part">
+            <h2><a href="http://127.0.0.1:5500/pratical/chicken.html">CHICKEN 🍗</a></h2>
+            <p>we present our Chicken Wings — golden-fried to perfection and coated in bold, mouthwatering sauces that
+               keep you coming back for more.😇 </p>
+         </div>
+      </section>
+
+
+      <section class="food-section">
+         <div class="image-part">
+            <img src="./PRATICAL PAGE_files/shawarma.jpg" alt="SHAWARMA">
+         </div>
+
+         <div class="text-part">
+            <h2><a href="http://127.0.0.1:5500/pratical/shawarma.html">SHAWARMA</a></h2>
+            <p> Signature sauce, perfect seasoning, and that unforgettable taste — only at Food Avenue.👌🏻🙂</p>
+         </div>
+      </section>
+
+
+      <section class="food-section">
+         <div class="image-part">
+            <img src="./PRATICAL PAGE_files/FRIES.jpg" alt="FRIES 🍟">
+         </div>
+
+         <div class="text-part">
+            <h2><a href="http://127.0.0.1:5500/pratical/fries.html">FRIES 🍟🍟</a></h2>
+            <p> Food Avenue brings you fries with that perfect crunch — simple, delicious, and unforgettable. </p>
+         </div>
+      </section>
+
+
+
+
+
+   </div>
+<!-- Code injected by live-server -->
+<script>
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+</script>
+
+
+</body></html>
