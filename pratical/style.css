@@ -143,6 +143,10 @@ h1 {
 .slide:nth-child(5) {
   animation-delay: 6s;
 }
+.slide:nth-child(6) {
+  animation-delay: 6s;
+}
+
 
 /* Fade animation keyframes */
 @keyframes fade {
