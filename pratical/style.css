@@ -27,17 +27,12 @@ a {
   color: blanchedalmond;
 }
 
-.navbar {
-  background-color: #e65f05;
-  padding: 20px 0;
+ .navbar {
   display: flex;
-  z-index: 10;
-  justify-content: space-between;
-  width: 100%;
   align-items: center;
-  top: 0;
-  left: 0;
-
+  justify-content: space-between;
+  background-color: orange;
+  padding: 10px 40px;
 }
 
 .logo img {
@@ -47,18 +42,12 @@ a {
 
 .navbar ul {
   list-style: none;
+  display: flex;
+  gap: 25px;
   margin: 0;
   padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 25px;
-
-
-  flex-wrap: nowrap;
-
-
 }
+
 
 .navbar li {
   margin: 0 20px;
