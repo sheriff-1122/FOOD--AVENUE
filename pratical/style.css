@@ -30,8 +30,9 @@ a {
 .navbar {
   background-color: #e65f05;
   padding: 20px 0;
-  position: fixed;
+  display: flex;
   z-index: 10;
+  justify-content: space-between;
   width: 100%;
   align-items: center;
   top: 0;
