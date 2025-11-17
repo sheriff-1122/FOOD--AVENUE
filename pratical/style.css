@@ -218,11 +218,12 @@ h1 {
   color: blanchedalmond;
   margin: 10px 0 5px;
   text-align: center;
+  font-size: larger;
 
 }
 
 .text-part p {
-  color: rgb(165, 105, 14);
+  color:blanchedalmond;
   text-align: center;
   font-size: 15px;
 }
