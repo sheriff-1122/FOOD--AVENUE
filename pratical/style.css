@@ -9,7 +9,7 @@ body {
 
   padding-top: 120px;
 
-  
+
   font-size: 18px;
   /* base text size */
   color: blanchedalmond;
@@ -218,10 +218,11 @@ h1 {
   color: blanchedalmond;
   margin: 10px 0 5px;
   text-align: center;
+
 }
 
 .text-part p {
-  color: blanchedalmond;
+  color: rgb(165, 105, 14);
   text-align: center;
   font-size: 15px;
 }
