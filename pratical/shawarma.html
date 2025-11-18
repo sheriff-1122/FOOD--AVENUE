@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="shawarma.css">
+    <script src="shawarma.js"></script>
 </head>
 
 <body>
@@ -21,7 +22,7 @@
                 <h2> Chicken Shawarma 🍗😊</h2>
                 <p>The Classic Shawarma wrapped with our signature garlic sauce.</p>
                 <p class="price">Price: ₦2500</p>
-                <button onclick="addToCart('Shawarma', 2500)">Add to Cart</button>
+                <button onclick="addToCart('chicken  Shawarma', 2500)">Add to Cart</button>
                 <h3> Soft, juicy chicken slices rolled with creamy garlic sauce — Chicken Shawarma made fresh the Food
                     Avenue way.😉</h3>
             </div>
@@ -74,9 +75,61 @@
                 <h2>Veggie Shawarma 🥕🍅🫑</h2>
                 <h3> For our veggie lovers, Food Avenue presents the Veggie Shawarma — fresh grilled vegetables, creamy
                     hummus, and herbs wrapped for a healthy, tasty delight.</h3>
+                <p class="price">Price: ₦2500</p>
+                <button onclick="addToCart('veggies shawarma', 2500)">Add to Cart</button>
             </div>
         </section>
 
+        <div class="cart-box">
+            <h2>Your Cart</h2>
+            <ul id="cart-items"></ul>
+            <p>Total: ₦<span id="cart-total">0</span></p>
+        </div>
+
+
+      <button onclick="addToCart('Fresh Burger', 1500)">Add to Cart - ₦1,500</button>
+
+<script>
+  // Read cart from localStorage or start with empty array
+  let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+  function addToCart(name, price) {
+      cart.push({ food: name, amount: price });
+      localStorage.setItem('cart', JSON.stringify(cart)); // save to localStorage
+      updateCart();
+  }
+
+  function removeItem(index) {
+      cart.splice(index, 1);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      updateCart();
+  }
+
+  function updateCart() {
+      const cartList = document.getElementById("cart-items");
+      const totalSpan = document.getElementById("cart-total");
+
+      if (!cartList) return; // skip if no cart container on this page
+
+      cartList.innerHTML = "";
+      let total = 0;
+
+      cart.forEach((item, index) => {
+          total += item.amount;
+          cartList.innerHTML += `
+              <li>
+                  ${item.food} - ₦${item.amount}
+                  <button onclick="removeItem(${index})">Remove</button>
+              </li>
+          `;
+      });
+
+      totalSpan.textContent = total;
+  }
+
+  // On page load, render cart if there's a cart container
+  updateCart();
+</script>
   
 
 

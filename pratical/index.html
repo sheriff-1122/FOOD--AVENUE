@@ -11,8 +11,8 @@
 
 <body>
    <nav class="navbar">
-   
-      
+
+
       <ul>
          <li><a href="#">Home</a></li>
          <li><a href="#">About</a></li>
@@ -30,8 +30,8 @@
          <div class="slide"><img src="images/bbq-pizza.jpg" alt="food 4"></div>
          <div class="slide"><img src="images/chicken-hotdog.jpg" alt="food 5"></div>
          <div class="slide"><img src="images/bbq-chicken.jpg" alt="bbq chicken"></div>
- 
-          
+
+
       </div>
       <p class="description">
          At Food Avenue, we bring together taste, creativity, and freshness to serve dishes that satisfy your cravings
@@ -102,7 +102,8 @@
 
       <section class="food-section">
          <div class="image-part">
-            <img src="images/shawarma.jpg" alt="FRIES 🍟">
+            <img src="images/shawarma-beef.jpg" alt="">
+
          </div>
 
          <div class="text-part">
@@ -113,9 +114,53 @@
       </section>
 
 
+     
 
+      <div class="cart-box">
+         <h2>Your Cart</h2>
+         <ul id="cart-items"></ul>
+         <p>Total: ₦<span id="cart-total">0</span></p>
+      </div>
 
    </div>
+
+  <script>
+  let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+  function removeItem(index) {
+      cart.splice(index, 1);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      updateCart();
+  }
+
+  function updateCart() {
+      const cartList = document.getElementById("cart-items");
+      const totalSpan = document.getElementById("cart-total");
+
+      cartList.innerHTML = "";
+      let total = 0;
+
+      cart.forEach((item, index) => {
+          total += item.amount;
+          cartList.innerHTML += `
+              <li>
+                  ${item.food} - ₦${item.amount}
+                  <button onclick="removeItem(${index})">Remove</button>
+              </li>
+          `;
+      });
+
+      totalSpan.textContent = total;
+  }
+
+  updateCart(); // Render cart on page load
+</script>
+
+
+
+
+
+
 
 
 </body>
