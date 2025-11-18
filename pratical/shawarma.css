@@ -80,7 +80,7 @@
 
 .cart-box {
   width: 300px;
-  background: #422801;
+  background:#422801;
   padding: 20px;
   border-radius: 15px;
   color:blanchedalmond;
@@ -123,7 +123,7 @@ button {
 }
 
 button:hover {
-  background: #2b1a01;
+  background:#2b1a01;
   transform: scale(1.05);
 }
 
@@ -132,7 +132,7 @@ button:hover {
 .price {
   font-weight: bold;
   color: #422801;
-  background:#2b1a01;
+  background:#422801;
   padding: 5px 10px;
   border-radius: 6px;
   margin: 10px 0;
