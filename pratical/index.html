@@ -114,7 +114,7 @@
       </section>
 
 
-     
+
 
       <div class="cart-box">
          <h2>Your Cart</h2>
@@ -124,37 +124,42 @@
 
    </div>
 
-  <script>
-  let cart = JSON.parse(localStorage.getItem('cart')) || [];
+   <script>
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-  function removeItem(index) {
-      cart.splice(index, 1);
-      localStorage.setItem('cart', JSON.stringify(cart));
-      updateCart();
-  }
+      function removeItem(index) {
+         cart.splice(index, 1);
+         localStorage.setItem('cart', JSON.stringify(cart));
+         updateCart();
+      }
 
-  function updateCart() {
-      const cartList = document.getElementById("cart-items");
-      const totalSpan = document.getElementById("cart-total");
+      function updateCart() {
+         const cartList = document.getElementById("cart-items");
+         const totalSpan = document.getElementById("cart-total");
 
-      cartList.innerHTML = "";
-      let total = 0;
+         cartList.innerHTML = "";
+         let total = 0;
 
-      cart.forEach((item, index) => {
-          total += item.amount;
-          cartList.innerHTML += `
+         cart.forEach((item, index) => {
+            total += item.amount;
+            cartList.innerHTML += `
               <li>
                   ${item.food} - ₦${item.amount}
                   <button onclick="removeItem(${index})">Remove</button>
               </li>
           `;
+         });
+
+         totalSpan.textContent = total;
+      }
+
+      updateCart(); // Render cart on page load
+      // 🔥 FIX: Update cart automatically when returning to the page
+      window.addEventListener("pageshow", function () {
+         updateCart();
       });
 
-      totalSpan.textContent = total;
-  }
-
-  updateCart(); // Render cart on page load
-</script>
+   </script>
 
 
 
