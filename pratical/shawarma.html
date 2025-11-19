@@ -130,14 +130,13 @@
 
                 totalSpan.textContent = total;
             }
-
-            // On page load, render cart if there's a cart container
-            updateCart();
-
+            updateCart(); // Render cart on page load
             // 🔥 FIX: Update cart automatically when returning to the page
             window.addEventListener("pageshow", function () {
                 updateCart();
             });
+
+
         </script>
 
 
