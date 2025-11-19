@@ -37,6 +37,8 @@
                 <h2>Beef🥩 Shawarma</h2>
                 <h3>Flame-Grilled Beef Shawarma — rich, juicy beef slices seasoned with bold spices, rolled with onions,
                     pickles, and smooth tahini for a deep, satisfying taste. </h3>
+                    <p class="price">Price: ₦3500</p>
+                <button onclick="addToCart('beef shawarma', 3500)">Add to Cart</button>
             </div>
         </section>
 
@@ -51,6 +53,8 @@
                 <h3>Can’t choose? Enjoy both 😉.
                     Our Mixed Shawarma combines tender chicken and juicy beef for a balanced, flavorful experience in
                     every bite.</h3>
+                    <p class="price">Price: ₦5500</p>
+                <button onclick="addToCart('mixed shawarma', 5500)">Add to Cart</button>
             </div>
         </section>
 
@@ -63,6 +67,8 @@
                 <h2>Cheese 🧀 Shawarma</h2>
                 <h3>Get cheesy with Food Avenue’s Cheese Shawarma — soft pita filled with sizzling chicken and melted
                     cheese that stretches with every delicious bite </h3>
+                <p class="price">Price: ₦4500</p>
+                <button onclick="addToCart('cheese shawarma', 4500)">Add to Cart</button>
             </div>
         </section>
 
@@ -86,50 +92,50 @@
             <p>Total: ₦<span id="cart-total">0</span></p>
         </div>
 
- 
 
-<script>
-  // Read cart from localStorage or start with empty array
-  let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-  function addToCart(name, price) {
-      cart.push({ food: name, amount: price });
-      localStorage.setItem('cart', JSON.stringify(cart)); // save to localStorage
-      updateCart();
-  }
+        <script>
+            // Read cart from localStorage or start with empty array
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-  function removeItem(index) {
-      cart.splice(index, 1);
-      localStorage.setItem('cart', JSON.stringify(cart));
-      updateCart();
-  }
+            function addToCart(name, price) {
+                cart.push({ food: name, amount: price });
+                localStorage.setItem('cart', JSON.stringify(cart)); // save to localStorage
+                updateCart();
+            }
 
-  function updateCart() {
-      const cartList = document.getElementById("cart-items");
-      const totalSpan = document.getElementById("cart-total");
+            function removeItem(index) {
+                cart.splice(index, 1);
+                localStorage.setItem('cart', JSON.stringify(cart));
+                updateCart();
+            }
 
-      if (!cartList) return; // skip if no cart container on this page
+            function updateCart() {
+                const cartList = document.getElementById("cart-items");
+                const totalSpan = document.getElementById("cart-total");
 
-      cartList.innerHTML = "";
-      let total = 0;
+                if (!cartList) return; // skip if no cart container on this page
 
-      cart.forEach((item, index) => {
-          total += item.amount;
-          cartList.innerHTML += `
+                cartList.innerHTML = "";
+                let total = 0;
+
+                cart.forEach((item, index) => {
+                    total += item.amount;
+                    cartList.innerHTML += `
               <li>
                   ${item.food} - ₦${item.amount}
                   <button onclick="removeItem(${index})">Remove</button>
               </li>
           `;
-      });
+                });
 
-      totalSpan.textContent = total;
-  }
+                totalSpan.textContent = total;
+            }
 
-  // On page load, render cart if there's a cart container
-  updateCart();
-</script>
-  
+            // On page load, render cart if there's a cart container
+            updateCart();
+        </script>
+
 
 
 

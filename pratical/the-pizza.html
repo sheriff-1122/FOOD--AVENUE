@@ -22,6 +22,8 @@
                 <h2>Margherita Pizza 😊</h2>
                 <h3>At Food Avenue, we present you the classic Margherita Pizza — topped with fresh mozzarella, ripe
                     tomatoes, and fragrant basil for that authentic Italian taste.👌🏻😉</h3>
+                <p class="price">Price: ₦6500</p>
+                <button onclick="addToCart('Margherita pizza', 6500)">Add to Cart</button>
             </div>
         </section>
 
@@ -35,6 +37,8 @@
                 <h2>Pepperoni Pizza 🍕</h2>
                 <h3>At Food Avenue, our Pepperoni Pizza is a flavor explosion — every slice sizzling with rich tomato
                     sauce, melted mozzarella, and perfectly crisped pepperoni.😃</h3>
+                <p class="price">Price: ₦8000</p>
+                <button onclick="addToCart('pepperoni pizza', 8000)">Add to Cart</button>
             </div>
         </section>
 
@@ -48,6 +52,8 @@
                 <h2> Cheese Pizza 😃</h2>
                 <h3>At Food Avenue, our Cheese Pizza is baked to golden perfection — gooey cheese, soft crust, and that
                     irresistible cheesy pull in every bite.</h3>
+                <p class="price">Price: ₦8000</p>
+                <button onclick="addToCart('cheese pizza', 8000)">Add to Cart</button>
             </div>
         </section>
 
@@ -62,6 +68,8 @@
                 <h2>BBQ Chicken Pizza 🍗🔥</h2>
                 <h3>At Food Avenue, our BBQ Chicken Pizza is a smoky sensation — loaded with tender chicken, melted
                     cheese, and our signature BBQ sauce that hits all the right notes.😋</h3>
+                <p class="price">Price: ₦8500</p>
+                <button onclick="addToCart('Bbq chicken pizza', 8500)">Add to Cart</button>
             </div>
         </section>
 
@@ -75,6 +83,8 @@
                 <h2>Hawaiian Pizza 🍍</h2>
                 <h3>At Food Avenue, we bring you the tropical twist — the Hawaiian Pizza, topped with juicy pineapple,
                     savory ham, and gooey mozzarella for that sweet and salty perfection.😉</h3>
+                <p class="price">Price: ₦6500</p>
+                <button onclick="addToCart('Hawaiian pizza', 6500)">Add to Cart</button>
             </div>
         </section>
 
@@ -88,6 +98,8 @@
                 <h2>Meat Lovers Pizza 🥩🍕</h2>
                 <h3>At Food Avenue, our Meat Lovers Pizza is a feast — stacked with pepperoni, beef, chicken, and
                     sausage for the ultimate meaty indulgence.🔥</h3>
+                <p class="price">Price: ₦9500</p>
+                <button onclick="addToCart('meat lovers pizza', 9500)">Add to Cart</button>
             </div>
         </section>
 
@@ -101,6 +113,8 @@
                 <h2>Veggie Delight Pizza 🥦🍅</h2>
                 <h3>At Food Avenue, our Veggie Delight Pizza celebrates freshness — loaded with colorful veggies,
                     olives, and herbs on a crispy crust for a garden-fresh bite every time.😊</h3>
+                <p class="price">Price: ₦8500</p>
+                <button onclick="addToCart('veggie pizza', 8500)">Add to Cart</button>
             </div>
         </section>
 
@@ -114,8 +128,65 @@
                 <h2>Supreme Pizza 😍</h2>
                 <h3>At Food Avenue, the Supreme Pizza reigns supreme — a perfect combo of meats, veggies, and cheese
                     that satisfies every craving in one slice.👌🏻</h3>
+                <p class="price">Price: ₦7500</p>
+                <button onclick="addToCart('supreme pizza', 7500)">Add to Cart</button>
             </div>
         </section>
+
+
+        <div class="cart-box">
+            <h2>Your Cart</h2>
+            <ul id="cart-items"></ul>
+            <p>Total: ₦<span id="cart-total">0</span></p>
+        </div>
+
+        
+        <script>
+            // Read cart from localStorage or start with empty array
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+            function addToCart(name, price) {
+                cart.push({ food: name, amount: price });
+                localStorage.setItem('cart', JSON.stringify(cart)); // save to localStorage
+                updateCart();
+            }
+
+            function removeItem(index) {
+                cart.splice(index, 1);
+                localStorage.setItem('cart', JSON.stringify(cart));
+                updateCart();
+            }
+
+            function updateCart() {
+                const cartList = document.getElementById("cart-items");
+                const totalSpan = document.getElementById("cart-total");
+
+                if (!cartList) return; // skip if no cart container on this page
+
+                cartList.innerHTML = "";
+                let total = 0;
+
+                cart.forEach((item, index) => {
+                    total += item.amount;
+                    cartList.innerHTML += `
+              <li>
+                  ${item.food} - ₦${item.amount}
+                  <button onclick="removeItem(${index})">Remove</button>
+              </li>
+          `;
+                });
+
+                totalSpan.textContent = total;
+            }
+
+            // On page load, render cart if there's a cart container
+            updateCart();
+        </script>
+
+
+
+
+
 
 </body>
 

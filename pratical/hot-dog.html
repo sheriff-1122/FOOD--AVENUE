@@ -21,6 +21,8 @@
                 <h2>American hotdog😊</h2>
                 <h3> At Food Avenue, experience the taste of America with our signature American Hotdog — juicy,
                     flavorful, and packed with that classic street-food charm.😉</h3>
+                    <p class="price">Price: ₦3500</p>
+                <button onclick="addToCart('american hotdog', 3500)">Add to Cart</button>
             </div>
         </section>
 
@@ -33,6 +35,8 @@
                 <h2>Cheese Hotdog 🧀</h2>
                 <h3>At Food Avenue, we present the Cheese Hotdog — a rich blend of smoky sausage and warm, melted cheese
                     that redefines comfort food.🙂 </h3>
+                    <p class="price">Price: ₦4000</p>
+                <button onclick="addToCart('cheese hotdog', 4000)">Add to Cart</button>
             </div>
         </section>
 
@@ -45,6 +49,8 @@
                 <h2>Chili Dog 🌶️🌶️</h2>
                 <h3>A grilled sausage topped with rich, spicy chili 🥵, onions, and melted cheese 🧀for a bold, hearty
                     flavor.😉</h3>
+                    <p class="price">Price: ₦3500</p>
+                <button onclick="addToCart('chili dog', 3500)">Add to Cart</button>
             </div>
         </section>
 
@@ -59,6 +65,8 @@
                 <h2>Bacon-Wrapped Hotdog 🥓</h2>
                 <h3>At Food Avenue, we take it up a notch with our Bacon-Wrapped Hotdog — a smoky sausage wrapped in
                     crispy bacon, topped with onions and a drizzle of sauce for that perfect crunch and flavor.🔥</h3>
+                    <p class="price">Price: ₦5000</p>
+                <button onclick="addToCart('bacon wrapped hotdog', 5000)">Add to Cart</button>
             </div>
         </section>
 
@@ -72,6 +80,8 @@
                 <h2>BBQ Hotdog 🍖</h2>
                 <h3>At Food Avenue, our BBQ Hotdog is grilled to smoky perfection — tender sausage glazed with our
                     special BBQ sauce and served with fresh toppings for a rich, mouthwatering taste.😋</h3>
+                    <p class="price">Price: ₦5000</p>
+                <button onclick="addToCart('veggies shawarma', 5000)">Add to Cart</button>
             </div>
         </section>
 
@@ -85,6 +95,8 @@
                 <h2>Chicken Hotdog 🍗</h2>
                 <h3>At Food Avenue, we serve up the Chicken Hotdog — light, juicy, and packed with flavor, it’s the
                     perfect choice for those who love a tender bite with a touch of spice.😊</h3>
+                    <p class="price">Price: ₦5500</p>
+                <button onclick="addToCart('chicken hotdog', 5500)">Add to Cart</button>
             </div>
         </section>
 
@@ -98,8 +110,66 @@
                 <h2>Veggie Hotdog 🥬</h2>
                 <h3>At Food Avenue, our Veggie Hotdog is made for the green lovers — filled with grilled veggies, fresh
                     lettuce, and creamy sauce for a tasty, guilt-free delight.💚</h3>
+                    <p class="price">Price: ₦3500</p>
+                <button onclick="addToCart('veggie hotdog', 3500)">Add to Cart</button>
             </div>
         </section>
+
+
+        
+        <div class="cart-box">
+            <h2>Your Cart</h2>
+            <ul id="cart-items"></ul>
+            <p>Total: ₦<span id="cart-total">0</span></p>
+        </div>
+
+
+        
+
+        <script>
+            // Read cart from localStorage or start with empty array
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+            function addToCart(name, price) {
+                cart.push({ food: name, amount: price });
+                localStorage.setItem('cart', JSON.stringify(cart)); // save to localStorage
+                updateCart();
+            }
+
+            function removeItem(index) {
+                cart.splice(index, 1);
+                localStorage.setItem('cart', JSON.stringify(cart));
+                updateCart();
+            }
+
+            function updateCart() {
+                const cartList = document.getElementById("cart-items");
+                const totalSpan = document.getElementById("cart-total");
+
+                if (!cartList) return; // skip if no cart container on this page
+
+                cartList.innerHTML = "";
+                let total = 0;
+
+                cart.forEach((item, index) => {
+                    total += item.amount;
+                    cartList.innerHTML += `
+              <li>
+                  ${item.food} - ₦${item.amount}
+                  <button onclick="removeItem(${index})">Remove</button>
+              </li>
+          `;
+                });
+
+                totalSpan.textContent = total;
+            }
+
+            // On page load, render cart if there's a cart container
+            updateCart();
+        </script>
+
+
+
  
 
 
