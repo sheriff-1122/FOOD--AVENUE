@@ -79,18 +79,19 @@
 
 .cart-box {
   width: 300px;
-  background:#291701;
+  background:#e65f05;
   padding: 20px;
   border-radius: 15px;
-  color:blanchedalmond;
+  color:#422801;
   box-shadow: 0 0 15px rgba(0,0,0,0.4);
   margin-bottom: 30px;
   text-align: center;
 }
 
 .cart-box h2 {
-  color: #e65f05;
+  color:#422801;
   margin-bottom: 15px;
+   
 }
 
 #cart-items {
@@ -100,7 +101,7 @@
 }
 
 #cart-items li {
-  background: #e65f05;
+  background:#422801;
   padding: 8px;
   margin: 6px 0;
   border-radius: 8px;
