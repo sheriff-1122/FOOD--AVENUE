@@ -77,4 +77,79 @@
 }
 }
 
+.cart-box {
+  width: 300px;
+  background:#291701;
+  padding: 20px;
+  border-radius: 15px;
+  color:blanchedalmond;
+  box-shadow: 0 0 15px rgba(0,0,0,0.4);
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.cart-box h2 {
+  color: #e65f05;
+  margin-bottom: 15px;
+}
+
+#cart-items {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 15px;
+}
+
+#cart-items li {
+  background: #e65f05;
+  padding: 8px;
+  margin: 6px 0;
+  border-radius: 8px;
+  color: blanchedalmond;
+  font-weight: bold;
+}
+
+
+/* ---- ADD TO CART BUTTON ---- */
+button {
+  padding: 10px 20px;
+  border: none;
+  background: #422801;
+  color: red;
+  border-radius: 10px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background:#2b1a01;
+  transform: scale(1.05);
+}
+
+
+/* ---- PRICE TEXT ---- */
+.price {
+  font-weight: bold;
+  color: #422801;
+  background:#422801;
+  padding: 5px 10px;
+  border-radius: 6px;
+  margin: 10px 0;
+}
+
+.remove-btn {
+  background: red;
+  color: white;
+  border: none;
+  padding: 4px 8px;
+  margin-left: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.remove-btn:hover {
+  background: darkred;
+}
+
 
