@@ -113,17 +113,14 @@
          </div>
       </section>
 
+
       <div class="cart-box">
          <h2>Your Cart</h2>
          <ul id="cart-items"></ul>
          <p>Total: ₦<span id="cart-total">0</span></p>
+         <p id="cart-message" style="color:#422801; font-weight: bold; margin-top: 10px;"></p>
+         <button id="checkoutBtn">Checkout</button>
       </div>
-      <button id="checkoutBtn">Checkout</button>
-
-
-
-
-
    </div>
 
    <script>
@@ -158,6 +155,7 @@
          function updateCart() {
             const cartList = document.getElementById("cart-items");
             const totalSpan = document.getElementById("cart-total");
+            const cartMessage = document.getElementById("cart-message");
 
             cartList.innerHTML = "";
             let total = 0;
@@ -166,17 +164,22 @@
                total += item.amount * item.quantity;
 
                cartList.innerHTML += `
-            <li class="cart-row">
-                <span>${item.food} – ₦${item.amount}</span>
-                <button onclick="decreaseQty(${index})">-</button>
-                <span>${item.quantity}</span>
-                <button onclick="increaseQty(${index})">+</button>
-                <button onclick="removeItem(${index})">Remove</button>
-            </li>
-            `;
+         <li class="cart-row">
+             <span>${item.food} – ₦${item.amount}</span>
+             <button onclick="decreaseQty(${index})">-</button>
+             <span>${item.quantity}</span>
+             <button onclick="increaseQty(${index})">+</button>
+             <button onclick="removeItem(${index})">Remove</button>
+         </li>
+         `;
             });
 
             totalSpan.textContent = total;
+
+            // Clear message if cart has items
+            if (cart.length > 0) {
+               cartMessage.textContent = "";
+            }
          }
 
          // Make the functions global so onclick inside HTML works
@@ -187,12 +190,14 @@
          // Render cart on page load
          updateCart();
 
-         // Checkout button (after DOM is loaded)
+         // Checkout button
          const checkoutBtn = document.getElementById("checkoutBtn");
+         const cartMessage = document.getElementById("cart-message");
+
          if (checkoutBtn) {
             checkoutBtn.addEventListener("click", function () {
                if (cart.length === 0) {
-                  alert("Your cart is empty!");
+                  cartMessage.textContent = "Your cart is empty. Add items to your cart!";
                   return;
                }
                window.location.href = "checkout.html";
@@ -206,7 +211,6 @@
          });
       });
    </script>
-
 
 
 

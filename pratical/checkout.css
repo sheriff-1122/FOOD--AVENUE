@@ -59,3 +59,11 @@ form#orderForm button:hover {
   background-color: #2b1a01;
   transform: scale(1.03);
 }
+.cart-box {
+    color: #e65f05;
+    
+}
+h1 {
+    color:#ff4b2b;
+
+}
