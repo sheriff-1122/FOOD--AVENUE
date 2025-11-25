@@ -180,7 +180,7 @@ button:hover {
     cursor: pointer;
 }
 .remove-btn {
-    background-color: #f44336;
+    background-color:#e65f05;
     color: white;
     border: none;
     padding: 6px 12px;  /* bigger padding */
