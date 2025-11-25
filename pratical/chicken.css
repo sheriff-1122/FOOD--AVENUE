@@ -54,25 +54,162 @@ h1 {
     text-align: center;
     font-size: 15px;
 }
- @media (max-width: 600px) {
 
-  .food-container {
-    flex-direction: column;
-    align-items: center;
-    padding: 15px;
-    gap: 20px;
-  }
+@media (max-width: 600px) {
 
-  .food-section {
-    width: 90%;
-    margin: 15px 0;
-    padding: 20px;
-  }
+    .food-container {
+        flex-direction: column;
+        align-items: center;
+        padding: 15px;
+        gap: 20px;
+    }
 
- .image-part img {
-  width: 100%;
-  height:100%;          /* keep original proportions */
-  object-fit: contain;   /* show full image without cropping */
-  border-radius: 15px;
+    .food-section {
+        width: 90%;
+        margin: 15px 0;
+        padding: 20px;
+    }
+
+    .image-part img {
+        width: 100%;
+        height: 100%;
+        /* keep original proportions */
+        object-fit: contain;
+        /* show full image without cropping */
+        border-radius: 15px;
+    }
 }
+
+.cart-box {
+    width: 300px;
+    background: #e65f05;
+    padding: 20px;
+    border-radius: 15px;
+    color: #422801;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.cart-box h2 {
+    color: #422801;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+#cart-items {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 15px;
+}
+
+#cart-items li {
+    background: #2b1a01;
+    padding: 8px;
+    margin: 6px 0;
+    border-radius: 8px;
+    color: blanchedalmond;
+    font-weight: bold;
+}
+
+
+/* ---- ADD TO CART BUTTON ---- */
+button {
+    padding: 10px 20px;
+    border: none;
+    background: #422801;
+    color: red;
+    border-radius: 10px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #2b1a01;
+    transform: scale(1.05);
+}
+
+
+/* ---- PRICE TEXT ---- */
+.price {
+    font-weight: bold;
+    color: #422801;
+    background: #2b1a01;
+    padding: 5px 10px;
+    border-radius: 6px;
+    margin: 10px 0;
+}
+
+.remove-btn {
+    background: red;
+    color: white;
+    border: none;
+    padding: 4px 8px;
+    margin-left: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.remove-btn:hover {
+    background: darkred;
+}
+
+.cart-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    /* allow long names to wrap */
+    padding: 5px 0;
+
+}
+
+.item-name {
+    flex: 1;
+    /* take available space */
+    word-break: break-word;
+    /* wrap long names */
+    font-weight: bold;
+}
+
+.item-controls {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    flex-shrink: 0;
+    /* prevent shrinking */
+}
+
+.item-controls button {
+    font-size: 14px;
+    padding: 6px 12px;
+    cursor: pointer;
+}
+
+.remove-btn {
+    background-color: #e65f05;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    /* bigger padding */
+    margin-left: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    /* bigger text */
+}
+
+.remove-btn:hover {
+    background-color: darkred;
+}
+
+/* Center the cart box */
+.cart-container {
+    display: flex;
+    justify-content: center; /* horizontal centering */
+    align-items: center;     /* vertical centering */
+    flex-direction: column;  /* stack items vertically if needed */
+    margin: 40px 0;          /* optional spacing from top/bottom */
 }
