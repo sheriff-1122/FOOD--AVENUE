@@ -198,3 +198,46 @@ button:hover {
 .remove-btn:hover {
     background-color: darkred;
 }
+
+.cart-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap; /* allow long names to wrap */
+    padding: 5px 0;
+   
+}
+
+.item-name {
+    flex: 1; /* take available space */
+    word-break: break-word; /* wrap long names */
+    font-weight: bold;
+}
+
+.item-controls {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    flex-shrink: 0; /* prevent shrinking */
+}
+
+.item-controls button {
+    font-size: 14px;
+    padding: 6px 12px;
+    cursor: pointer;
+}
+.remove-btn {
+    background-color:#e65f05;
+    color: white;
+    border: none;
+    padding: 6px 12px;  /* bigger padding */
+    margin-left: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;  /* bigger text */
+}
+
+.remove-btn:hover {
+    background-color: darkred;
+}
+
