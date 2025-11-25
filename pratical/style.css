@@ -227,91 +227,75 @@ h1 {
   text-align: center;
   font-size: 15px;
 }
-
+ 
  .cart-box {
-  width: 300px;
-  background:#e65f05;
-  padding: 20px;
-  border-radius: 15px;
-  color:#422801;
-  box-shadow: 0 0 15px rgba(0,0,0,0.4);
-  margin-bottom: 30px;
-  text-align: center;
-}
+   width: 300px;
+   background: #e65f05;
+   padding: 20px;
+   border-radius: 15px;
+   color: blanchedalmond;
+   box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+   margin-bottom: 30px;
+   text-align: center;
+ }
 
-.cart-box h2 {
-  color:#422801;
-  margin-bottom: 15px;
-   
-}
+ .cart-box h2 {
+   color: #2b1a01;
+   margin-bottom: 15px;
+ }
 
-#cart-items {
-  list-style: none;
-  padding: 0;
-  margin-bottom: 15px;
-}
+ #cart-items {
+   list-style: none;
+   padding: 0;
+   margin-bottom: 15px;
+ }
 
-#cart-items li {
-  background:#2b1a01;
-  padding: 8px;
-  margin: 6px 0;
-  border-radius: 8px;
-  color: blanchedalmond;
-  font-weight: bold;
-}
-
-
-/* ---- ADD TO CART BUTTON ---- */
-button {
-  padding: 10px 20px;
-  border: none;
-  background: #422801;
-  color: red;
-  border-radius: 10px;
-  font-size: 15px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-button:hover {
-  background:#2b1a01;
-  transform: scale(1.05);
-}
+ #cart-items li {
+   background: #2b1a01;
+   padding: 8px;
+   margin: 6px 0;
+   border-radius: 8px;
+   color: blanchedalmond;
+   font-weight: bold;
+ }
 
 
-/* ---- PRICE TEXT ---- */
-.price {
-  font-weight: bold;
-  color: #422801;
-  background:#422801;
-  padding: 5px 10px;
-  border-radius: 6px;
-  margin: 10px 0;
-}
+ /* ---- ADD TO CART BUTTON ---- */
+ button {
+   padding: 10px 20px;
+   border: none;
+   background:#422801;
+   color:blanchedalmond;
+   border-radius: 10px;
+   font-size: 15px;
+   cursor: pointer;
+   transition: 0.3s;
+ }
 
-.remove-btn {
-  background: red;
-  color: white;
-  border: none;
-  padding: 4px 8px;
-  margin-left: 10px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 12px;
-}
+ button:hover {
+   background:#8a3c0f;
 
-.remove-btn:hover {
-  background: darkred;
-}
+   transform: scale(1.05);
+ }
 
-  .cart-row {
-    display: flex;
-    align-items: center;
-    gap: 10px;         /* space between items */
-    margin-bottom: 8px;
-  }
 
-  .qty-btn {
-    padding: 2px 8px;
-    cursor: pointer;
-  }
+ /* ---- PRICE TEXT ---- */
+ .price {
+   font-weight: bold;
+   color:#422801;
+   background:#e65f05;
+   padding: 5px 10px;
+   border-radius: 6px;
+   margin: 10px 0;
+ }
+
+ .remove-btn {
+   background: red;
+   color: white;
+   border: none;
+   padding: 4px 8px;
+   margin-left: 10px;
+   border-radius: 5px;
+   cursor: pointer;
+   font-size: 12px;
+ }
