@@ -57,11 +57,14 @@ function updateCartDisplay() {
     cart.forEach((item, index) => {
         total += item.amount * item.quantity;
         cartList.innerHTML += `
-            <li>
-                ${item.food} – ₦${item.amount} x ${item.quantity}
-                <button onclick="decreaseQty(${index})">-</button>
-                <button onclick="increaseQty(${index})">+</button>
-                <button onclick="removeItem(${index})">Remove</button>
+            <li class="cart-row">
+                <span class="item-name">${item.food} – ₦${item.amount}</span>
+                <div class="item-controls">
+                    <button onclick="decreaseQty(${index})">-</button>
+                    <span>${item.quantity}</span>
+                    <button onclick="increaseQty(${index})">+</button>
+                    <button class="remove-btn" onclick="removeItem(${index})">Remove</button>
+                </div>
             </li>
         `;
     });

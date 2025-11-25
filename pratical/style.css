@@ -61,7 +61,7 @@ a {
 
 }
 
- 
+
 
 .navbar a:hover {
   color: yellowgreen;
@@ -225,21 +225,21 @@ h1 {
 }
 
 
- .cart-box {
+.cart-box {
   width: 300px;
-  background:#e65f05;
+  background: #e65f05;
   padding: 20px;
   border-radius: 15px;
-  color:#422801;
-  box-shadow: 0 0 15px rgba(0,0,0,0.4);
+  color: #422801;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
   margin-bottom: 30px;
   text-align: center;
 }
 
 .cart-box h2 {
-  color:#422801;
+  color: #422801;
   margin-bottom: 15px;
-   
+
 }
 
 #cart-items {
@@ -249,7 +249,7 @@ h1 {
 }
 
 #cart-items li {
-  background:#422801;
+  background: #422801;
   padding: 8px;
   margin: 6px 0;
   border-radius: 8px;
@@ -271,7 +271,7 @@ button {
 }
 
 button:hover {
-  background:#2b1a01;
+  background: #2b1a01;
   transform: scale(1.05);
 }
 
@@ -280,7 +280,7 @@ button:hover {
 .price {
   font-weight: bold;
   color: #422801;
-  background:#422801;
+  background: #422801;
   padding: 5px 10px;
   border-radius: 6px;
   margin: 10px 0;
@@ -301,14 +301,50 @@ button:hover {
   background: darkred;
 }
 
-  .cart-row {
+.cart-box ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+ 
+.cart-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap; /* allow long names to wrap */
+    padding: 5px 0;
+   
+}
+
+.item-name {
+    flex: 1; /* take available space */
+    word-break: break-word; /* wrap long names */
+    font-weight: bold;
+}
+
+.item-controls {
     display: flex;
     align-items: center;
-    gap: 10px;         /* space between items */
-    margin-bottom: 8px;
-  }
+    gap: 5px;
+    flex-shrink: 0; /* prevent shrinking */
+}
 
-  .qty-btn {
-    padding: 2px 8px;
+.item-controls button {
+    font-size: 14px;
+    padding: 6px 12px;
     cursor: pointer;
-  }
+}
+.remove-btn {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 6px 12px;  /* bigger padding */
+    margin-left: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;  /* bigger text */
+}
+
+.remove-btn:hover {
+    background-color: darkred;
+}
