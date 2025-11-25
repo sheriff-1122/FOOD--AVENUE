@@ -118,54 +118,54 @@
          <ul id="cart-items"></ul>
          <p>Total: ₦<span id="cart-total">0</span></p>
       </div>
+      <button id="checkoutBtn">Checkout</button>
+
 
 
 
 
    </div>
- 
 
    <script>
-      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      window.addEventListener("DOMContentLoaded", () => {
+         let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-      function increaseQty(index) {
-         cart[index].quantity++;
-         saveCart();
-         updateCart();
-      }
-
-      function decreaseQty(index) {
-         cart[index].quantity--;
-         if (cart[index].quantity <= 0) {
-            cart.splice(index, 1);
+         function increaseQty(index) {
+            cart[index].quantity++;
+            saveCart();
+            updateCart();
          }
-         saveCart();
-         updateCart();
-      }
 
-      function removeItem(index) {
-         cart.splice(index, 1);
-         saveCart();
-         updateCart();
-      }
+         function decreaseQty(index) {
+            cart[index].quantity--;
+            if (cart[index].quantity <= 0) {
+               cart.splice(index, 1);
+            }
+            saveCart();
+            updateCart();
+         }
 
-      function saveCart() {
-         localStorage.setItem('cart', JSON.stringify(cart));
-      }
+         function removeItem(index) {
+            cart.splice(index, 1);
+            saveCart();
+            updateCart();
+         }
 
-      function updateCart() {
-         const cartList = document.getElementById("cart-items");
-         const totalSpan = document.getElementById("cart-total");
+         function saveCart() {
+            localStorage.setItem('cart', JSON.stringify(cart));
+         }
 
-         if (!cartList) return;
+         function updateCart() {
+            const cartList = document.getElementById("cart-items");
+            const totalSpan = document.getElementById("cart-total");
 
-         cartList.innerHTML = "";
-         let total = 0;
+            cartList.innerHTML = "";
+            let total = 0;
 
-         cart.forEach((item, index) => {
-            total += item.amount * item.quantity;
+            cart.forEach((item, index) => {
+               total += item.amount * item.quantity;
 
-            cartList.innerHTML += `
+               cartList.innerHTML += `
             <li class="cart-row">
                 <span>${item.food} – ₦${item.amount}</span>
                 <button onclick="decreaseQty(${index})">-</button>
@@ -173,21 +173,42 @@
                 <button onclick="increaseQty(${index})">+</button>
                 <button onclick="removeItem(${index})">Remove</button>
             </li>
-        `;
-         });
+            `;
+            });
 
-         totalSpan.textContent = total;
-      }
+            totalSpan.textContent = total;
+         }
 
-      // Render cart on page load
-      updateCart();
+         // Make the functions global so onclick inside HTML works
+         window.increaseQty = increaseQty;
+         window.decreaseQty = decreaseQty;
+         window.removeItem = removeItem;
 
-      // Keep cart updated if the page is revisited
-      window.addEventListener("pageshow", function () {
-         cart = JSON.parse(localStorage.getItem('cart')) || [];
+         // Render cart on page load
          updateCart();
+
+         // Checkout button (after DOM is loaded)
+         const checkoutBtn = document.getElementById("checkoutBtn");
+         if (checkoutBtn) {
+            checkoutBtn.addEventListener("click", function () {
+               if (cart.length === 0) {
+                  alert("Your cart is empty!");
+                  return;
+               }
+               window.location.href = "checkout.html";
+            });
+         }
+
+         // Keep cart updated if page is revisited
+         window.addEventListener("pageshow", function () {
+            cart = JSON.parse(localStorage.getItem('cart')) || [];
+            updateCart();
+         });
       });
    </script>
+
+
+
 
 
 
