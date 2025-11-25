@@ -150,3 +150,15 @@ button:hover {
 .remove-btn:hover {
   background: darkred;
 }
+
+  .cart-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;         /* space between items */
+    margin-bottom: 8px;
+  }
+
+  .qty-btn {
+    padding: 2px 8px;
+    cursor: pointer;
+  }

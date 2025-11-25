@@ -223,13 +223,12 @@ h1 {
 }
 
 .text-part p {
-  color:blanchedalmond;
+  color: blanchedalmond;
   text-align: center;
   font-size: 15px;
 }
 
- 
-.cart-box {
+ .cart-box {
   width: 300px;
   background:#e65f05;
   padding: 20px;
@@ -243,6 +242,7 @@ h1 {
 .cart-box h2 {
   color:#422801;
   margin-bottom: 15px;
+   
 }
 
 #cart-items {
@@ -256,7 +256,7 @@ h1 {
   padding: 8px;
   margin: 6px 0;
   border-radius: 8px;
-  color:blanchedalmond;
+  color: blanchedalmond;
   font-weight: bold;
 }
 
@@ -274,7 +274,7 @@ button {
 }
 
 button:hover {
-  background: #2b1a01;
+  background:#2b1a01;
   transform: scale(1.05);
 }
 
@@ -283,7 +283,7 @@ button:hover {
 .price {
   font-weight: bold;
   color: #422801;
-  background:#2b1a01;
+  background:#422801;
   padding: 5px 10px;
   border-radius: 6px;
   margin: 10px 0;
@@ -303,4 +303,15 @@ button:hover {
 .remove-btn:hover {
   background: darkred;
 }
- 
+
+  .cart-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;         /* space between items */
+    margin-bottom: 8px;
+  }
+
+  .qty-btn {
+    padding: 2px 8px;
+    cursor: pointer;
+  }

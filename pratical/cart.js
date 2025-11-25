@@ -5,16 +5,43 @@ let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
 // Add item to cart
 function addToCart(foodName, price) {
-    cart.push({ food: foodName, amount: price });
-    localStorage.setItem('cart', JSON.stringify(cart));
+    // Check if item already exists
+    let existing = cart.find(item => item.food === foodName);
+    if (existing) {
+        existing.quantity++;
+    } else {
+        cart.push({ food: foodName, amount: price, quantity: 1 });
+    }
+    saveCart();
     updateCartDisplay();
 }
 
-// Remove item by index
+// Increase / Decrease quantity
+function increaseQty(index) {
+    cart[index].quantity++;
+    saveCart();
+    updateCartDisplay();
+}
+
+function decreaseQty(index) {
+    cart[index].quantity--;
+    if (cart[index].quantity <= 0) {
+        cart.splice(index, 1); // remove item if quantity = 0
+    }
+    saveCart();
+    updateCartDisplay();
+}
+
+// Remove item completely
 function removeItem(index) {
     cart.splice(index, 1);
-    localStorage.setItem('cart', JSON.stringify(cart));
+    saveCart();
     updateCartDisplay();
+}
+
+// Save cart to localStorage
+function saveCart() {
+    localStorage.setItem('cart', JSON.stringify(cart));
 }
 
 // Update the cart display on the page
@@ -28,10 +55,12 @@ function updateCartDisplay() {
     let total = 0;
 
     cart.forEach((item, index) => {
-        total += item.amount;
+        total += item.amount * item.quantity;
         cartList.innerHTML += `
             <li>
-                ${item.food} - ₦${item.amount}
+                ${item.food} – ₦${item.amount} x ${item.quantity}
+                <button onclick="decreaseQty(${index})">-</button>
+                <button onclick="increaseQty(${index})">+</button>
                 <button onclick="removeItem(${index})">Remove</button>
             </li>
         `;
