@@ -1,17 +1,23 @@
-// ======== CART LOGIC ========
+ // ======== CART LOGIC ========
 
 // Load cart from localStorage (or empty if none)
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
+// Format currency as ₦8,500
+function formatNaira(amount) {
+    return "₦" + Number(amount).toLocaleString();
+}
+
 // Add item to cart
 function addToCart(foodName, price) {
-    // Check if item already exists
     let existing = cart.find(item => item.food === foodName);
+
     if (existing) {
         existing.quantity++;
     } else {
         cart.push({ food: foodName, amount: price, quantity: 1 });
     }
+
     saveCart();
     updateCartDisplay();
 }
@@ -25,9 +31,11 @@ function increaseQty(index) {
 
 function decreaseQty(index) {
     cart[index].quantity--;
+
     if (cart[index].quantity <= 0) {
-        cart.splice(index, 1); // remove item if quantity = 0
+        cart.splice(index, 1);
     }
+
     saveCart();
     updateCartDisplay();
 }
@@ -44,21 +52,25 @@ function saveCart() {
     localStorage.setItem('cart', JSON.stringify(cart));
 }
 
-// Update the cart display on the page
+// Update the cart display
 function updateCartDisplay() {
     const cartList = document.getElementById("cart-items");
     const totalSpan = document.getElementById("cart-total");
 
-    if (!cartList || !totalSpan) return; // skip if cart container not on this page
+    // If this page doesn't have a cart UI, stop
+    if (!cartList || !totalSpan) return;
 
     cartList.innerHTML = "";
     let total = 0;
 
     cart.forEach((item, index) => {
-        total += item.amount * item.quantity;
+        const itemTotal = item.amount * item.quantity;
+        total += itemTotal;
+
         cartList.innerHTML += `
             <li class="cart-row">
-                <span class="item-name">${item.food} – ₦${item.amount}</span>
+                <span class="item-name">${item.food} – ${formatNaira(item.amount)}</span>
+
                 <div class="item-controls">
                     <button onclick="decreaseQty(${index})">-</button>
                     <span>${item.quantity}</span>
@@ -69,16 +81,15 @@ function updateCartDisplay() {
         `;
     });
 
-    totalSpan.textContent = total;
+    totalSpan.textContent = formatNaira(total);
 }
 
-// ======== INITIALIZE CART ON PAGE LOAD ========
+// ======== INITIALIZE CART ========
 window.addEventListener('DOMContentLoaded', () => {
     cart = JSON.parse(localStorage.getItem('cart')) || [];
     updateCartDisplay();
 });
 
-// Update cart if user navigates back to the page
 window.addEventListener('pageshow', () => {
     cart = JSON.parse(localStorage.getItem('cart')) || [];
     updateCartDisplay();
