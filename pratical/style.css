@@ -64,7 +64,7 @@ a {
 
 
 .navbar a:hover {
-  color:#422801;
+  color: #422801;
 }
 
 
@@ -224,7 +224,6 @@ h1 {
   font-size: 15px;
 }
 
-
 .cart-box {
   width: 300px;
   background: #e65f05;
@@ -239,7 +238,7 @@ h1 {
 .cart-box h2 {
   color: #422801;
   margin-bottom: 15px;
-
+  text-align: center;
 }
 
 #cart-items {
@@ -249,7 +248,7 @@ h1 {
 }
 
 #cart-items li {
-  background: #422801;
+  background: #2b1a01;
   padding: 8px;
   margin: 6px 0;
   border-radius: 8px;
@@ -280,7 +279,7 @@ button:hover {
 .price {
   font-weight: bold;
   color: #422801;
-  background: #422801;
+  background: #2b1a01;
   padding: 5px 10px;
   border-radius: 6px;
   margin: 10px 0;
@@ -299,12 +298,6 @@ button:hover {
 
 .remove-btn:hover {
   background: darkred;
-}
-
-.cart-box ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
 }
 
 .cart-row {
@@ -340,7 +333,7 @@ button:hover {
 }
 
 .remove-btn {
-  background-color:#e65f05;
+  background-color: #e65f05;
   color: white;
   border: none;
   padding: 6px 12px;
@@ -355,6 +348,21 @@ button:hover {
 .remove-btn:hover {
   background-color: darkred;
 }
+
+/* Center the cart box */
+.cart-container {
+  display: flex;
+  justify-content: center;
+  /* horizontal centering */
+  align-items: center;
+  /* vertical centering */
+  flex-direction: column;
+  /* stack items vertically if needed */
+  margin: 40px 0;
+  /* optional spacing from top/bottom */
+}
+
+
 
 /* About Page Styles */
 .about-section {
@@ -468,4 +476,3 @@ button:hover {
 .contact-info a:hover {
   color: yellowgreen;
 }
- 
