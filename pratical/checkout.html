@@ -1,73 +1,84 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Checkout - Food Avenue</title>
     <link rel="stylesheet" href="checkout.css">
-    
 </head>
+
 <body>
 
-<h1>Checkout</h1>
+    <h1>Checkout</h1>
 
-<!-- Cart Summary -->
-<div class="cart-box">
-    <h2>Your Order</h2>
-    <ul id="orderSummary"></ul>
-    <p>Total: ₦<span id="totalAmount">0</span></p>
-</div>
+    <!-- Cart Summary -->
+    <div class="cart-box">
+        <h2>Your Order</h2>
+        <ul id="orderSummary"></ul>
+        <p>Total: ₦<span id="totalAmount">0</span></p>
+    </div>
 
-<!-- Delivery Details Form -->
-<form id="orderForm">
-    <h2>Delivery Details</h2>
-    <input type="text" id="fullName" placeholder="Full Name" required>
-    <input type="text" id="phone" placeholder="Phone Number" required>
-    <textarea id="address" placeholder="Delivery Address" required></textarea>
-    <button type="submit">Place Order</button>
-</form>
+    <!-- Delivery Details Form -->
+    <form id="orderForm">
+        <h2>Delivery Details</h2>
+        <input type="text" id="fullName" placeholder="Full Name" required>
+        <input type="text" id="phone" placeholder="Phone Number" required>
+        <textarea id="address" placeholder="Delivery Address" required></textarea>
+        <button type="submit">Place Order</button>
+    </form>
 
-<script>
-// Get cart from localStorage
-let cart = JSON.parse(localStorage.getItem("cart")) || [];
-let orderSummary = document.getElementById("orderSummary");
-let totalAmount = 0;
+    <script>
+        // ===== FORMAT NAIRA WITH COMMA =====
+        function formatNaira(amount) {
+            return Number(amount).toLocaleString("en-NG");
+        }
 
-// Display cart items
-cart.forEach(item => {
-    let li = document.createElement("li");
-    li.textContent = `${item.food} x ${item.quantity} - ₦${item.amount * item.quantity}`;
-    orderSummary.appendChild(li);
-    totalAmount += item.amount * item.quantity;
-});
+        // Get cart from localStorage
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        let orderSummary = document.getElementById("orderSummary");
+        let totalAmount = 0;
 
-document.getElementById("totalAmount").innerText = totalAmount;
+        // Display cart items
+        cart.forEach(item => {
+            let itemTotal = item.amount * item.quantity;
+            let li = document.createElement("li");
 
-// Handle order submission
-document.getElementById("orderForm").addEventListener("submit", function(e){
-    e.preventDefault();
+            li.textContent = `${item.food} x ${item.quantity} - ₦${formatNaira(itemTotal)}`;
+            orderSummary.appendChild(li);
 
-    let order = {
-        name: document.getElementById("fullName").value,
-        phone: document.getElementById("phone").value,
-        address: document.getElementById("address").value,
-        cart: cart,
-        total: totalAmount,
-        time: new Date().toLocaleString()
-    };
+            totalAmount += itemTotal;
+        });
 
-    // Save order to localStorage
-    let orders = JSON.parse(localStorage.getItem("orders")) || [];
-    orders.push(order);
-    localStorage.setItem("orders", JSON.stringify(orders));
+        // Show formatted total
+        document.getElementById("totalAmount").innerText = formatNaira(totalAmount);
 
-    // Clear cart
-    localStorage.removeItem("cart");
+        // Handle order submission
+        document.getElementById("orderForm").addEventListener("submit", function (e) {
+            e.preventDefault();
 
-    // Redirect to success page
-    window.location.href = "order-succes.html";
-});
-</script>
+            let order = {
+                name: document.getElementById("fullName").value,
+                phone: document.getElementById("phone").value,
+                address: document.getElementById("address").value,
+                cart: cart,
+                total: totalAmount,
+                time: new Date().toLocaleString()
+            };
+
+            // Save order to localStorage
+            let orders = JSON.parse(localStorage.getItem("orders")) || [];
+            orders.push(order);
+            localStorage.setItem("orders", JSON.stringify(orders));
+
+            // Clear cart
+            localStorage.removeItem("cart");
+
+            // Redirect to success page
+            window.location.href = "order-succes.html";
+        });
+    </script>
 
 </body>
+
 </html>

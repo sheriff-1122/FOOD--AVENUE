@@ -127,6 +127,11 @@
       window.addEventListener("DOMContentLoaded", () => {
          let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
+         // Format numbers like ₦8,500
+         function formatNaira(amount) {
+            return amount.toLocaleString('en-NG');
+         }
+
          function increaseQty(index) {
             cart[index].quantity++;
             saveCart();
@@ -164,30 +169,30 @@
                total += item.amount * item.quantity;
 
                cartList.innerHTML += `
-         <li class="cart-row">
-             <span>${item.food} – ₦${item.amount}</span>
-             <button onclick="decreaseQty(${index})">-</button>
-             <span>${item.quantity}</span>
-             <button onclick="increaseQty(${index})">+</button>
-             <button onclick="removeItem(${index})">Remove</button>
-         </li>
-         `;
+               <li class="cart-row">
+                   <span>${item.food} – ₦${formatNaira(item.amount)}</span>
+                   <button onclick="decreaseQty(${index})">-</button>
+                   <span>${item.quantity}</span>
+                   <button onclick="increaseQty(${index})">+</button>
+                   <button onclick="removeItem(${index})">Remove</button>
+               </li>
+            `;
             });
 
-            totalSpan.textContent = total;
+            // Update total with formatting
+            totalSpan.textContent = formatNaira(total);
 
-            // Clear message if cart has items
             if (cart.length > 0) {
                cartMessage.textContent = "";
             }
          }
 
-         // Make the functions global so onclick inside HTML works
+         // GLOBAL functions for onclick buttons
          window.increaseQty = increaseQty;
          window.decreaseQty = decreaseQty;
          window.removeItem = removeItem;
 
-         // Render cart on page load
+         // Render on load
          updateCart();
 
          // Checkout button
@@ -204,13 +209,14 @@
             });
          }
 
-         // Keep cart updated if page is revisited
+         // Re-render on page return
          window.addEventListener("pageshow", function () {
             cart = JSON.parse(localStorage.getItem('cart')) || [];
             updateCart();
          });
       });
    </script>
+
 
 
 
