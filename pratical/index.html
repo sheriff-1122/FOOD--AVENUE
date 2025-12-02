@@ -151,24 +151,30 @@
             <p> Unique, flavorful, and made to delight — our specialty drinks are a treat in every sip </p>
          </div>
       </section>
+      <div class="food-container">
 
- 
-      <div class="cart-box">
+        <div class="cart-box">
          <h2>Your Cart</h2>
          <ul id="cart-items"></ul>
+
          <p>Total: ₦<span id="cart-total">0</span></p>
-         <p id="cart-message" style="color:#422801; font-weight: bold; margin-top: 10px;"></p>
+
+         <p id="cart-message" style="color:#422801; font-weight:bold; margin-top:10px;"></p>
+
          <button id="checkoutBtn">Checkout</button>
       </div>
+      </div>
+
    </div>
 
+   <!-- UPDATED JAVASCRIPT -->
    <script>
       window.addEventListener("DOMContentLoaded", () => {
-         let cart = JSON.parse(localStorage.getItem('cart')) || [];
+         let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
          // Format numbers like ₦8,500
          function formatNaira(amount) {
-            return amount.toLocaleString('en-NG');
+            return amount.toLocaleString("en-NG");
          }
 
          function increaseQty(index) {
@@ -193,7 +199,7 @@
          }
 
          function saveCart() {
-            localStorage.setItem('cart', JSON.stringify(cart));
+            localStorage.setItem("cart", JSON.stringify(cart));
          }
 
          function updateCart() {
@@ -208,17 +214,23 @@
                total += item.amount * item.quantity;
 
                cartList.innerHTML += `
-               <li class="cart-row">
-                   <span>${item.food} – ₦${formatNaira(item.amount)}</span>
-                   <button onclick="decreaseQty(${index})">-</button>
-                   <span>${item.quantity}</span>
-                   <button onclick="increaseQty(${index})">+</button>
-                   <button onclick="removeItem(${index})">Remove</button>
-               </li>
-            `;
+                  <li class="cart-row">
+                     <div class="cart-info">
+                        <span class="cart-name">${item.food}</span>
+                        <span class="cart-price">₦${formatNaira(item.amount)}</span>
+                     </div>
+
+                     <div class="cart-controls">
+                        <button class="qty-btn" onclick="decreaseQty(${index})">−</button>
+                        <span class="qty">${item.quantity}</span>
+                        <button class="qty-btn" onclick="increaseQty(${index})">+</button>
+                     </div>
+
+                     <button class="remove-btn" onclick="removeItem(${index})">Remove</button>
+                  </li>
+               `;
             });
 
-            // Update total with formatting
             totalSpan.textContent = formatNaira(total);
 
             if (cart.length > 0) {
@@ -226,36 +238,32 @@
             }
          }
 
-         // GLOBAL functions for onclick buttons
+         // Make functions accessible
          window.increaseQty = increaseQty;
          window.decreaseQty = decreaseQty;
          window.removeItem = removeItem;
 
-         // Render on load
+         // Render the cart
          updateCart();
 
-         // Checkout button
          const checkoutBtn = document.getElementById("checkoutBtn");
          const cartMessage = document.getElementById("cart-message");
 
-         if (checkoutBtn) {
-            checkoutBtn.addEventListener("click", function () {
-               if (cart.length === 0) {
-                  cartMessage.textContent = "Your cart is empty. Add items to your cart!";
-                  return;
-               }
-               window.location.href = "checkout.html";
-            });
-         }
+         checkoutBtn.addEventListener("click", () => {
+            if (cart.length === 0) {
+               cartMessage.textContent = "Your cart is empty. Add items to your cart!";
+               return;
+            }
+            window.location.href = "checkout.html";
+         });
 
-         // Re-render on page return
-         window.addEventListener("pageshow", function () {
-            cart = JSON.parse(localStorage.getItem('cart')) || [];
+         // When returning from checkout
+         window.addEventListener("pageshow", () => {
+            cart = JSON.parse(localStorage.getItem("cart")) || [];
             updateCart();
          });
       });
    </script>
-
 
 
 
