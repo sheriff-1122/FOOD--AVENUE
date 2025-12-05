@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>chicken</title>
     <link rel="stylesheet" href="chicken.css">
     <script src="cart.js"></script>
 </head>
@@ -50,7 +50,7 @@
                     celebration.👌🏻
                 </h3>
                 <p class="price">Price: ₦10,500</p>
-                <button onclick="addToCart('bbq chicken', 10,500)">Add to Cart</button>
+                <button onclick="addToCart('bbq chicken', 10500)">Add to Cart</button>
         </section>
 
         <section class="food-section">
@@ -64,7 +64,7 @@
                     buds.👌🏻🙂
                 </h3>
                 <p class="price">Price: ₦12,500</p>
-                <button onclick="addToCart('chicken wings', 12,500)">Add to Cart</button>
+                <button onclick="addToCart('chicken wings', 12500)">Add to Cart</button>
         </section>
 
 
@@ -79,7 +79,7 @@
                     Nuggets😇
                 </h3>
                 <p class="price">Price: ₦9,000</p>
-                <button onclick="addToCart('chicken Nuggets😇',9000)">Add to Cart</button>
+                <button onclick="addToCart('chicken Nuggets😇', 9000)">Add to Cart</button>
         </section>
 
 
@@ -93,18 +93,18 @@
                 <h3>Small but mighty — these crunchy chicken pops are bursting with flavor in every bite 😇
                 </h3>
                 <p class="price">Price: ₦8,500</p>
-                <button onclick="addToCart('chicken Popcorn ', 8,500)">Add to Cart</button>
+                <button onclick="addToCart('chicken Popcorn ', 8500)">Add to Cart</button>
         </section>
     </div>
-
-
     <div class="cart-container">
         <div class="cart-box">
             <h2>Your Cart</h2>
             <ul id="cart-items"></ul>
-            <p>Total: ₦<span id="cart-total">0</span></p>
+            <p>Total: <span id="cart-total">0</span></p>
         </div>
     </div>
+
+
 
     <script>
         let cart = JSON.parse(localStorage.getItem('cart')) || [];
