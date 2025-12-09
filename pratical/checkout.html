@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -6,6 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Checkout - Food Avenue</title>
     <link rel="stylesheet" href="checkout.css">
+
+    <!-- Firebase App -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <!-- Firebase Firestore -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 </head>
 
 <body>
@@ -19,6 +24,9 @@
         <p>Total: ₦<span id="totalAmount">0</span></p>
     </div>
 
+    <!-- Message placeholder -->
+    <div id="message" style="color: red; margin-bottom: 10px;"></div>
+
     <!-- Delivery Details Form -->
     <form id="orderForm">
         <h2>Delivery Details</h2>
@@ -29,35 +37,62 @@
     </form>
 
     <script>
-        // ===== FORMAT NAIRA WITH COMMA =====
+        // ===== FORMAT NAIRA =====
         function formatNaira(amount) {
             return Number(amount).toLocaleString("en-NG");
         }
 
-        // Get cart from localStorage
+        // ===== GENERATE UNIQUE ORDER ID =====
+        function generateOrderID() {
+            const timestamp = Date.now().toString(36);
+            const randomStr = Math.random().toString(36).substring(2, 7);
+            return `ORD-${timestamp}-${randomStr}`.toUpperCase();
+        }
+
+        // ===== GET CART =====
         let cart = JSON.parse(localStorage.getItem("cart")) || [];
         let orderSummary = document.getElementById("orderSummary");
         let totalAmount = 0;
 
-        // Display cart items
         cart.forEach(item => {
             let itemTotal = item.amount * item.quantity;
             let li = document.createElement("li");
-
             li.textContent = `${item.food} x ${item.quantity} - ₦${formatNaira(itemTotal)}`;
             orderSummary.appendChild(li);
-
             totalAmount += itemTotal;
         });
 
-        // Show formatted total
         document.getElementById("totalAmount").innerText = formatNaira(totalAmount);
 
-        // Handle order submission
-        document.getElementById("orderForm").addEventListener("submit", function (e) {
+        // ===== FIREBASE CONFIG =====
+        const firebaseConfig = {
+            apiKey: "AIzaSyCqaaO2ffQD5WjAsoQ12kmrTyjz8JG-NYY",
+            authDomain: "food-avenue-orders.firebaseapp.com",
+            projectId: "food-avenue-orders",
+            storageBucket: "food-avenue-orders.firebasestorage.app",
+            messagingSenderId: "497081436982",
+            appId: "1:497081436982:web:90cd3ddad8faa97d650197",
+            measurementId: "G-JLRQFS3BSJ"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        const messageDiv = document.getElementById("message");
+
+        document.getElementById("orderForm").addEventListener("submit", async function (e) {
             e.preventDefault();
 
+            if (cart.length === 0) {
+                messageDiv.textContent = "Your cart is empty. Please add items before placing an order.";
+                return;
+            }
+
+            messageDiv.textContent = "";
+
+            let orderID = generateOrderID();
             let order = {
+                id: orderID,
                 name: document.getElementById("fullName").value,
                 phone: document.getElementById("phone").value,
                 address: document.getElementById("address").value,
@@ -66,7 +101,18 @@
                 time: new Date().toLocaleString()
             };
 
-            // Save order to localStorage
+            console.log("Submitting order to Firebase:", order);
+
+            try {
+                await db.collection("orders").doc(orderID).set(order);
+                console.log("Order successfully sent to Firebase!");
+            } catch (error) {
+                console.error("Firebase error:", error);
+                messageDiv.textContent = "Failed to submit order. Please try again.";
+                return; // stop redirect if Firebase fails
+            }
+
+            // Save to localStorage
             let orders = JSON.parse(localStorage.getItem("orders")) || [];
             orders.push(order);
             localStorage.setItem("orders", JSON.stringify(orders));
@@ -80,5 +126,4 @@
     </script>
 
 </body>
-
 </html>
