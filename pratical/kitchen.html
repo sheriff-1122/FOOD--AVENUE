@@ -1,0 +1,75 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kitchen Orders - Food Avenue</title>
+  <link rel="stylesheet" href="kitchen.css">
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+</head>
+<body>
+
+  <h1>Kitchen Orders</h1>
+  <div id="ordersContainer"></div>
+
+  <script>
+    // ===== FIREBASE CONFIG =====
+    const firebaseConfig = {
+      apiKey: "AIzaSyCqaaO2ffQD5WjAsoQ12kmrTyjz8JG-NYY",
+      authDomain: "food-avenue-orders.firebaseapp.com",
+      projectId: "food-avenue-orders",
+      storageBucket: "food-avenue-orders.firebasestorage.app",
+      messagingSenderId: "497081436982",
+      appId: "1:497081436982:web:90cd3ddad8faa97d650197",
+      measurementId: "G-JLRQFS3BSJ"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
+    const ordersContainer = document.getElementById("ordersContainer");
+
+    // ===== REAL-TIME LISTENER =====
+    db.collection("orders").orderBy("time", "desc").onSnapshot(snapshot => {
+      ordersContainer.innerHTML = ""; // clear previous
+
+      if (snapshot.empty) {
+        ordersContainer.innerHTML = "<p>No orders yet.</p>";
+        return;
+      }
+
+      snapshot.forEach(doc => {
+        const order = doc.data();
+        const div = document.createElement("div");
+        div.classList.add("order-card");
+        div.innerHTML = `
+          <h3>Order ID: ${order.id}</h3>
+          <p><strong>Name:</strong> ${order.name}</p>
+          <p><strong>Phone:</strong> ${order.phone}</p>
+          <p><strong>Address:</strong> ${order.address}</p>
+          <p><strong>Total:</strong> ₦${Number(order.total).toLocaleString("en-NG")}</p>
+          <p><strong>Items:</strong></p>
+          <ul>
+            ${order.cart.map(item => `<li>${item.food} x ${item.quantity} - ₦${Number(item.amount).toLocaleString("en-NG")}</li>`).join("")}
+          </ul>
+          <p><em>Time: ${order.time}</em></p>
+          <button class="complete-btn">Mark as Completed</button>
+          <hr>
+        `;
+        ordersContainer.appendChild(div);
+
+        // ===== MARK ORDER AS COMPLETED =====
+        div.querySelector(".complete-btn").addEventListener("click", () => {
+          if (confirm(`Mark order ${order.id} as completed?`)) {
+            db.collection("orders").doc(order.id).delete()
+              .then(() => console.log(`Order ${order.id} removed from Firebase`))
+              .catch(err => console.error("Error deleting order: ", err));
+          }
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>
