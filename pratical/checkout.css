@@ -67,3 +67,27 @@ h1 {
     color:#ff4b2b;
 
 }
+/* MOBILE ONLY – Make the checkout form smaller */
+@media (max-width: 600px) {
+
+  form#orderForm {
+    width: 90%;           /* instead of fixed 350px */
+    max-width: 300px;     /* make it smaller */
+    padding: 25px;        /* reduce padding for mobile */
+  }
+
+  form#orderForm input,
+  form#orderForm textarea {
+    font-size: 15px;
+    padding: 10px;
+  }
+
+  form#orderForm h2 {
+    font-size: 20px;
+  }
+
+  form#orderForm button {
+    font-size: 15px;
+    padding: 10px;
+  }
+}
