@@ -169,6 +169,33 @@ h1 {
   margin-top: 5px;
 }
 
+/* MOBILE ONLY FIX — center all sections */
+@media (max-width: 600px) {
+
+    .food-container {
+        justify-content: center !important;
+        align-items: center !important;
+        gap: 20px !important;
+    }
+
+    .food-section {
+        width: 100%;
+        max-width: 330px;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+    }
+
+    .image-part img {
+        width: 100%;
+        max-width: 280px;
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+    }
+}
+
+
 .text-part h1 {
   color: blanchedalmond;
   margin: 10px 0 5px 0;
