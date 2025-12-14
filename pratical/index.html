@@ -208,6 +208,7 @@
             cart[index].quantity++;
             saveCart();
             updateCart();
+            updateCartCount();
          }
 
          function decreaseQty(index) {
@@ -217,12 +218,14 @@
             }
             saveCart();
             updateCart();
+            updateCartCount();
          }
 
          function removeItem(index) {
             cart.splice(index, 1);
             saveCart();
             updateCart();
+            updateCartCount();
          }
 
          function saveCart() {
