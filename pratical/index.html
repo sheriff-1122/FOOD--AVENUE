@@ -18,12 +18,16 @@
          <img src="images/Delicious Home Food (2).jpg" alt="Logo">
       </div>
 
-
       <ul>
          <li><a href="#">Home</a></li>
          <li><a href="about.html">About</a></li>
          <li><a href="contact.html">Contact</a></li>
       </ul>
+
+      <!-- CART ICON -->
+      <div class="nav-cart" onclick="toggleCart()">
+         🛒 <span id="cart-count">0</span>
+      </div>
    </nav>
 
    <section class="intro">
@@ -159,21 +163,36 @@
             <p> Unique, flavorful, and made to delight — our specialty drinks are a treat in every sip </p>
          </div>
       </section>
-      <div class="food-container">
 
-         <div class="cart-box">
-            <h2>Your Cart</h2>
-            <ul id="cart-items"></ul>
 
-            <p>Total: ₦<span id="cart-total">0</span></p>
 
-            <p id="cart-message" style="color:#422801; font-weight:bold; margin-top:10px;"></p>
 
-            <button id="checkoutBtn">Checkout</button>
-         </div>
+   </div>
+   <div class="cart-box" id="cartBox">
+
+      <!-- Cart Header -->
+      <div class="cart-header">
+         <h2>Your Cart</h2>
+         <span class="close-cart" onclick="toggleCart()">✖</span>
+      </div>
+
+      <!-- Cart Items -->
+      <ul id="cart-items" class="cart-items"></ul>
+
+      <!-- Cart Footer -->
+      <div class="cart-footer">
+         <p class="cart-total">
+            Total: ₦<span id="cart-total">0</span>
+         </p>
+
+         <p id="cart-message" class="cart-message"></p>
+
+         <button id="checkoutBtn">Checkout</button>
       </div>
 
    </div>
+
+
 
    <!-- UPDATED JAVASCRIPT -->
    <script>
@@ -269,13 +288,16 @@
          window.addEventListener("pageshow", () => {
             cart = JSON.parse(localStorage.getItem("cart")) || [];
             updateCart();
+           
+
          });
       });
    </script>
    <script>
       document.addEventListener("DOMContentLoaded", () => {
          // select both food sections AND cart box
-         const revealElements = document.querySelectorAll(".food-section, .cart-box");
+         const revealElements = document.querySelectorAll(".food-section");
+
 
          const observer = new IntersectionObserver(
             (entries) => {
@@ -292,7 +314,47 @@
 
          revealElements.forEach(el => observer.observe(el));
       });
+     
+
    </script>
+   <script>
+      function toggleCart() {
+         document.getElementById("cartBox").classList.toggle("show");
+      }
+
+      function updateCartCount() {
+         const cart = JSON.parse(localStorage.getItem("cart")) || [];
+         let count = 0;
+
+         cart.forEach(item => {
+            count += item.quantity;
+         });
+
+         document.getElementById("cart-count").textContent = count;
+      }
+      updateCartCount();
+
+   </script>
+
+   <script>
+      function updateCartCount() {
+         const cart = JSON.parse(localStorage.getItem("cart")) || [];
+         let count = 0;
+
+         cart.forEach(item => {
+            count += item.quantity;
+         });
+
+         const countEl = document.getElementById("cart-count");
+         if (countEl) {
+            countEl.textContent = count;
+         }
+      }
+      
+
+   </script>
+
+
 
 
 
