@@ -166,9 +166,10 @@
       </div>
    </div>
 
-   <!-- FIXED JAVASCRIPT -->
+   <!-- COMPLETELY FIXED JAVASCRIPT -->
    <script>
-      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      let cart = [];
+      let lastCartString = "";
 
       // Format numbers like ₦8,500
       function formatNaira(amount) {
@@ -177,7 +178,7 @@
 
       // Update cart count badge
       function updateCartCount() {
-         const cart = JSON.parse(localStorage.getItem("cart")) || [];
+         cart = JSON.parse(localStorage.getItem("cart")) || [];
          let count = 0;
 
          cart.forEach(item => {
@@ -222,33 +223,39 @@
          const totalSpan = document.getElementById("cart-total");
          const cartMessage = document.getElementById("cart-message");
 
+         if (!cartList || !totalSpan) return;
+
          cartList.innerHTML = "";
          let total = 0;
 
-         cart.forEach((item, index) => {
-            total += item.amount * item.quantity;
+         if (cart.length === 0) {
+            cartList.innerHTML = '<li style="text-align:center; color:#999; padding:20px;">Your cart is empty</li>';
+         } else {
+            cart.forEach((item, index) => {
+               total += item.amount * item.quantity;
 
-            cartList.innerHTML += `
-               <li class="cart-row">
-                  <div class="cart-info">
-                     <span class="cart-name">${item.food}</span>
-                     <span class="cart-price">₦${formatNaira(item.amount)}</span>
-                  </div>
+               cartList.innerHTML += `
+                  <li class="cart-row">
+                     <div class="cart-info">
+                        <span class="cart-name">${item.food}</span>
+                        <span class="cart-price">₦${formatNaira(item.amount)}</span>
+                     </div>
 
-                  <div class="cart-controls">
-                     <button class="qty-btn" onclick="decreaseQty(${index})">−</button>
-                     <span class="qty">${item.quantity}</span>
-                     <button class="qty-btn" onclick="increaseQty(${index})">+</button>
-                  </div>
+                     <div class="cart-controls">
+                        <button class="qty-btn" onclick="decreaseQty(${index})">−</button>
+                        <span class="qty">${item.quantity}</span>
+                        <button class="qty-btn" onclick="increaseQty(${index})">+</button>
+                     </div>
 
-                  <button class="remove-btn" onclick="removeItem(${index})">Remove</button>
-               </li>
-            `;
-         });
+                     <button class="remove-btn" onclick="removeItem(${index})">Remove</button>
+                  </li>
+               `;
+            });
+         }
 
          totalSpan.textContent = formatNaira(total);
 
-         if (cart.length > 0) {
+         if (cart.length > 0 && cartMessage) {
             cartMessage.textContent = "";
          }
 
@@ -256,54 +263,70 @@
       }
 
       function toggleCart() {
-         document.getElementById("cartBox").classList.toggle("show");
+         const cartBox = document.getElementById("cartBox");
+         if (cartBox) {
+            cartBox.classList.toggle("show");
+            // Update cart when opening
+            updateCart();
+         }
       }
 
-      // Load cart when page loads
+      // Continuously check for cart changes
+      function checkCartChanges() {
+         const currentCartString = localStorage.getItem("cart") || "[]";
+         
+         if (currentCartString !== lastCartString) {
+            lastCartString = currentCartString;
+            updateCart();
+            updateCartCount();
+         }
+      }
+
+      // Initialize on page load
       window.addEventListener("DOMContentLoaded", () => {
          updateCart();
          updateCartCount();
+         lastCartString = localStorage.getItem("cart") || "[]";
 
          const checkoutBtn = document.getElementById("checkoutBtn");
          const cartMessage = document.getElementById("cart-message");
 
-         checkoutBtn.addEventListener("click", () => {
-            if (cart.length === 0) {
-               cartMessage.textContent = "Your cart is empty. Add items to your cart!";
-               return;
-            }
-            window.location.href = "checkout.html";
-         });
+         if (checkoutBtn) {
+            checkoutBtn.addEventListener("click", () => {
+               cart = JSON.parse(localStorage.getItem("cart")) || [];
+               if (cart.length === 0) {
+                  if (cartMessage) {
+                     cartMessage.textContent = "Your cart is empty. Add items to your cart!";
+                  }
+                  return;
+               }
+               window.location.href = "checkout.html";
+            });
+         }
+
+         // Check for changes every 500ms (half second)
+         setInterval(checkCartChanges, 500);
       });
 
-      // Update cart when returning from other pages (back button)
-      window.addEventListener("pageshow", (event) => {
-         updateCart();
-         updateCartCount();
+      // Update when page becomes visible again
+      document.addEventListener("visibilitychange", () => {
+         if (!document.hidden) {
+            updateCart();
+            updateCartCount();
+         }
       });
 
-      // Update cart when window regains focus (coming back from another page)
+      // Update when window gets focus
       window.addEventListener("focus", () => {
          updateCart();
          updateCartCount();
       });
 
-      // Listen for storage changes (when cart is updated from other pages/tabs)
-      window.addEventListener("storage", (e) => {
-         if (e.key === "cart") {
-            updateCart();
-            updateCartCount();
-         }
+      // Update when navigating back
+      window.addEventListener("pageshow", () => {
+         updateCart();
+         updateCartCount();
       });
-
-      // Check for cart updates every second (fallback)
-      setInterval(() => {
-         const currentCart = JSON.parse(localStorage.getItem("cart")) || [];
-         if (JSON.stringify(currentCart) !== JSON.stringify(cart)) {
-            updateCart();
-            updateCartCount();
-         }
-      }, 1000);
    </script>
 
    <script>
