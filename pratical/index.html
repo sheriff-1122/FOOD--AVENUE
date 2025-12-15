@@ -40,12 +40,15 @@
          <div class="slide"><img src="images/pineapple.jpg" alt="food 4"></div>
          <div class="slide"><img src="images/chicken-hotdog.jpg" alt="food 5"></div>
          <div class="slide"><img src="images/bbq-chicken.jpg" alt="bbq chicken"></div>
+
+
       </div>
       <p class="description">
          At Food Avenue, we bring together taste, creativity, and freshness to serve dishes that satisfy your cravings
          and warm your heart. Every meal is crafted with passion, using the finest ingredients to give you a truly
          unforgettable experience. Explore our latest delicacies.
       </p>
+
    </section>
 
    <div class="food-container">
@@ -53,6 +56,7 @@
          <div class="image-part">
             <img src="images/burrger.jpg" alt="burger">
          </div>
+
          <div class="text-part">
             <h1><a href="fresh-burger.html">FRESH BURGER 🍔</a></h1>
             <p>We craft each dish using fresh ingredients from local farms</p>
@@ -63,16 +67,19 @@
          <div class="image-part">
             <img src="images/pizza.jpg" alt="Fresh pizza">
          </div>
+
          <div class="text-part">
             <h1><a href="the-pizza.html">PIZZA 🍕</a></h1>
             <p>Fresh dough, rich cheese,and bold flavour baked to perfection - one bite and you'll be craving more. </p>
          </div>
       </section>
 
+
       <section class="food-section">
          <div class="image-part">
             <img src="images/hoot-dog.jpg" alt="burger">
          </div>
+
          <div class="text-part">
             <h1><a href="hot-dog.html">HOTDOG 🌭</a></h1>
             <p>our hotdogs 🌭are crafted to bring you that perfect bite — soft, warm buns wrapped around juicy,
@@ -84,6 +91,7 @@
          <div class="image-part">
             <img src="images/fried chicken.jpg" alt="Chicken">
          </div>
+
          <div class="text-part">
             <h1><a href="chicken.html">CHICKEN 🍗</a></h1>
             <p>we present our Chicken Wings — golden-fried to perfection and coated in bold, mouthwatering sauces that
@@ -95,6 +103,7 @@
          <div class="image-part">
             <img src="images/FRIES.jpg" alt="FRIES 🍟">
          </div>
+
          <div class="text-part">
             <h1><a href="fries.html">FRIES 🍟🍟</a></h1>
             <p> Food Avenue brings you fries with that perfect crunch — simple, delicious, and unforgettable. </p>
@@ -104,7 +113,9 @@
       <section class="food-section">
          <div class="image-part">
             <img src="images/main-shawarma.jpg" alt="">
+
          </div>
+
          <div class="text-part">
             <h1><a href="shawarma.html">SHAWARMA 😇</a></h1>
             <p> At Food Avenue, we present to you the Classic Shawarma — tender, marinated chicken slices wrapped in
@@ -112,10 +123,13 @@
          </div>
       </section>
 
+
       <section class="food-section">
          <div class="image-part">
             <img src="images/juice.jpg" alt="juice">
+
          </div>
+
          <div class="text-part">
             <h1><a href="juice.html">Juices 🍹</a></h1>
             <p> Freshly squeezed and naturally sweet — our juices are packed with vitamins and bursting with flavor.😉
@@ -123,28 +137,39 @@
          </div>
       </section>
 
+
       <section class="food-section">
          <div class="image-part">
             <img src="images/coke.jpg" alt="soft drink">
+
          </div>
+
          <div class="text-part">
             <h1><a href="drinks.html">Soft Drinks 🥤</a></h1>
-            <p> Fizzy, fun, and classic — our soft drinks are here to keep you refreshed and energized.🥤</p>
+            <p> Fizzy, fun, and classic — our soft drinks are here to keep you refreshed and energized.🥤
+            <p>
          </div>
       </section>
+
 
       <section class="food-section">
          <div class="image-part">
             <img src="images/special-drink.jpg" alt="speciality-drink">
+
          </div>
+
          <div class="text-part">
             <h1><a href="speciality-drink.html">Specialty Drinks 🍸</a></h1>
             <p> Unique, flavorful, and made to delight — our specialty drinks are a treat in every sip </p>
          </div>
       </section>
-   </div>
 
+
+
+
+   </div>
    <div class="cart-box" id="cartBox">
+
       <!-- Cart Header -->
       <div class="cart-header">
          <h2>Your Cart</h2>
@@ -164,73 +189,58 @@
 
          <button id="checkoutBtn">Checkout</button>
       </div>
+
    </div>
 
-   <!-- COMPLETELY FIXED JAVASCRIPT -->
+
+
+   <!-- UPDATED JAVASCRIPT -->
    <script>
-      let cart = [];
-      let lastCartString = "";
+      window.addEventListener("DOMContentLoaded", () => {
+         let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-      // Format numbers like ₦8,500
-      function formatNaira(amount) {
-         return amount.toLocaleString("en-NG");
-      }
-
-      // Update cart count badge
-      function updateCartCount() {
-         cart = JSON.parse(localStorage.getItem("cart")) || [];
-         let count = 0;
-
-         cart.forEach(item => {
-            count += item.quantity;
-         });
-
-         const countEl = document.getElementById("cart-count");
-         if (countEl) {
-            countEl.textContent = count;
+         // Format numbers like ₦8,500
+         function formatNaira(amount) {
+            return amount.toLocaleString("en-NG");
          }
-      }
 
-      function increaseQty(index) {
-         cart[index].quantity++;
-         saveCart();
-         updateCart();
-      }
+         function increaseQty(index) {
+            cart[index].quantity++;
+            saveCart();
+            updateCart();
+            updateCartCount();
+         }
 
-      function decreaseQty(index) {
-         cart[index].quantity--;
-         if (cart[index].quantity <= 0) {
+         function decreaseQty(index) {
+            cart[index].quantity--;
+            if (cart[index].quantity <= 0) {
+               cart.splice(index, 1);
+            }
+            saveCart();
+            updateCart();
+            updateCartCount();
+         }
+
+         function removeItem(index) {
             cart.splice(index, 1);
+            saveCart();
+            updateCart();
+            updateCartCount();
          }
-         saveCart();
-         updateCart();
-      }
 
-      function removeItem(index) {
-         cart.splice(index, 1);
-         saveCart();
-         updateCart();
-      }
+         function saveCart() {
+            localStorage.setItem("cart", JSON.stringify(cart));
+            updateCartCount();
+         }
 
-      function saveCart() {
-         localStorage.setItem("cart", JSON.stringify(cart));
-         updateCartCount();
-      }
+         function updateCart() {
+            const cartList = document.getElementById("cart-items");
+            const totalSpan = document.getElementById("cart-total");
+            const cartMessage = document.getElementById("cart-message");
 
-      function updateCart() {
-         cart = JSON.parse(localStorage.getItem("cart")) || [];
-         const cartList = document.getElementById("cart-items");
-         const totalSpan = document.getElementById("cart-total");
-         const cartMessage = document.getElementById("cart-message");
+            cartList.innerHTML = "";
+            let total = 0;
 
-         if (!cartList || !totalSpan) return;
-
-         cartList.innerHTML = "";
-         let total = 0;
-
-         if (cart.length === 0) {
-            cartList.innerHTML = '<li style="text-align:center; color:#999; padding:20px;">Your cart is empty</li>';
-         } else {
             cart.forEach((item, index) => {
                total += item.amount * item.quantity;
 
@@ -251,88 +261,47 @@
                   </li>
                `;
             });
+
+            totalSpan.textContent = formatNaira(total);
+
+            if (cart.length > 0) {
+               cartMessage.textContent = "";
+            }
          }
 
-         totalSpan.textContent = formatNaira(total);
+         // Make functions accessible
+         window.increaseQty = increaseQty;
+         window.decreaseQty = decreaseQty;
+         window.removeItem = removeItem;
 
-         if (cart.length > 0 && cartMessage) {
-            cartMessage.textContent = "";
-         }
-
-         updateCartCount();
-      }
-
-      function toggleCart() {
-         const cartBox = document.getElementById("cartBox");
-         if (cartBox) {
-            cartBox.classList.toggle("show");
-            // Update cart when opening
-            updateCart();
-         }
-      }
-
-      // Continuously check for cart changes
-      function checkCartChanges() {
-         const currentCartString = localStorage.getItem("cart") || "[]";
-         
-         if (currentCartString !== lastCartString) {
-            lastCartString = currentCartString;
-            updateCart();
-            updateCartCount();
-         }
-      }
-
-      // Initialize on page load
-      window.addEventListener("DOMContentLoaded", () => {
+         // Render the cart
          updateCart();
-         updateCartCount();
-         lastCartString = localStorage.getItem("cart") || "[]";
 
          const checkoutBtn = document.getElementById("checkoutBtn");
          const cartMessage = document.getElementById("cart-message");
 
-         if (checkoutBtn) {
-            checkoutBtn.addEventListener("click", () => {
-               cart = JSON.parse(localStorage.getItem("cart")) || [];
-               if (cart.length === 0) {
-                  if (cartMessage) {
-                     cartMessage.textContent = "Your cart is empty. Add items to your cart!";
-                  }
-                  return;
-               }
-               window.location.href = "checkout.html";
-            });
-         }
+         checkoutBtn.addEventListener("click", () => {
+            if (cart.length === 0) {
+               cartMessage.textContent = "Your cart is empty. Add items to your cart!";
+               return;
+            }
+            window.location.href = "checkout.html";
+         });
 
-         // Check for changes every 500ms (half second)
-         setInterval(checkCartChanges, 500);
-      });
-
-      // Update when page becomes visible again
-      document.addEventListener("visibilitychange", () => {
-         if (!document.hidden) {
+         // When returning from checkout
+         window.addEventListener("pageshow", () => {
+            cart = JSON.parse(localStorage.getItem("cart")) || [];
             updateCart();
-            updateCartCount();
-         }
-      });
+           
 
-      // Update when window gets focus
-      window.addEventListener("focus", () => {
-         updateCart();
-         updateCartCount();
-      });
-
-      // Update when navigating back
-      window.addEventListener("pageshow", () => {
-         updateCart();
-         updateCartCount();
+         });
       });
    </script>
-
    <script>
       document.addEventListener("DOMContentLoaded", () => {
-         // select food sections for animation
+         // select both food sections AND cart box
          const revealElements = document.querySelectorAll(".food-section");
+
 
          const observer = new IntersectionObserver(
             (entries) => {
@@ -343,13 +312,61 @@
                });
             },
             {
-               threshold: 0.1
+               threshold: 0.1 // triggers immediately when a tiny part of element is visible
             }
          );
 
          revealElements.forEach(el => observer.observe(el));
       });
+     
+
    </script>
+   <script>
+      function toggleCart() {
+         document.getElementById("cartBox").classList.toggle("show");
+      }
+
+      function updateCartCount() {
+         const cart = JSON.parse(localStorage.getItem("cart")) || [];
+         let count = 0;
+
+         cart.forEach(item => {
+            count += item.quantity;
+         });
+
+         document.getElementById("cart-count").textContent = count;
+      }
+      updateCartCount();
+
+   </script>
+
+   <script>
+      function updateCartCount() {
+         const cart = JSON.parse(localStorage.getItem("cart")) || [];
+         let count = 0;
+
+         cart.forEach(item => {
+            count += item.quantity;
+         });
+
+         const countEl = document.getElementById("cart-count");
+         if (countEl) {
+            countEl.textContent = count;
+         }
+      }
+      
+
+   </script>
+
+
+
+
+
+
+
+
+
+
 
 </body>
 
