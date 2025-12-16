@@ -367,6 +367,156 @@
    </script>
 
 
+   <script>
+      /* ================= GLOBAL CART ================= */
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+      /* ================= HELPERS ================= */
+      function formatNaira(amount) {
+         return amount.toLocaleString("en-NG");
+      }
+
+      function saveCart() {
+         localStorage.setItem("cart", JSON.stringify(cart));
+         updateCartCount(); // Always update navbar count
+      }
+
+      /* ================= CART COUNT ================= */
+      function updateCartCount() {
+         const cartData = JSON.parse(localStorage.getItem("cart")) || [];
+         let count = 0;
+         cartData.forEach(item => count += item.quantity);
+
+         const countEl = document.getElementById("cart-count");
+         if (countEl) countEl.textContent = count;
+      }
+
+      /* ================= ADD TO CART (EXAMPLE) ================= */
+      function addToCart(food, amount) {
+         const existingIndex = cart.findIndex(item => item.food === food);
+         if (existingIndex !== -1) {
+            cart[existingIndex].quantity++;
+         } else {
+            cart.push({ food, amount, quantity: 1 });
+         }
+         saveCart();
+         updateCart();
+      }
+
+      /* ================= CART ACTIONS ================= */
+      function increaseQty(index) {
+         cart[index].quantity++;
+         saveCart();
+         updateCart();
+      }
+
+      function decreaseQty(index) {
+         cart[index].quantity--;
+         if (cart[index].quantity <= 0) cart.splice(index, 1);
+         saveCart();
+         updateCart();
+      }
+
+      function removeItem(index) {
+         cart.splice(index, 1);
+         saveCart();
+         updateCart();
+      }
+
+      /* ================= RENDER CART ================= */
+      function updateCart() {
+         const cartList = document.getElementById("cart-items");
+         const totalSpan = document.getElementById("cart-total");
+         const cartMessage = document.getElementById("cart-message");
+
+         if (!cartList || !totalSpan) return;
+
+         cartList.innerHTML = "";
+         let total = 0;
+
+         cart.forEach((item, index) => {
+            total += item.amount * item.quantity;
+
+            cartList.innerHTML += `
+        <li class="cart-row">
+          <div class="cart-info">
+            <span class="cart-name">${item.food}</span>
+            <span class="cart-price">₦${formatNaira(item.amount)}</span>
+          </div>
+
+          <div class="cart-controls">
+            <button class="qty-btn" onclick="decreaseQty(${index})">−</button>
+            <span class="qty">${item.quantity}</span>
+            <button class="qty-btn" onclick="increaseQty(${index})">+</button>
+          </div>
+
+          <button class="remove-btn" onclick="removeItem(${index})">Remove</button>
+        </li>
+      `;
+         });
+
+         totalSpan.textContent = formatNaira(total);
+         if (cart.length > 0 && cartMessage) cartMessage.textContent = "";
+      }
+
+      /* ================= CART TOGGLE ================= */
+      function toggleCart() {
+         const box = document.getElementById("cartBox");
+         if (box) box.classList.toggle("show");
+      }
+
+      /* ================= CHECKOUT ================= */
+      function setupCheckout() {
+         const checkoutBtn = document.getElementById("checkoutBtn");
+         const cartMessage = document.getElementById("cart-message");
+         if (!checkoutBtn) return;
+
+         checkoutBtn.addEventListener("click", () => {
+            if (cart.length === 0) {
+               cartMessage.textContent = "Your cart is empty. Add items to your cart!";
+               return;
+            }
+            window.location.href = "checkout.html";
+         });
+      }
+
+      /* ================= SCROLL REVEAL ================= */
+      function setupReveal() {
+         const revealElements = document.querySelectorAll(".food-section");
+         const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+               if (entry.isIntersecting) entry.target.classList.add("show");
+            });
+         }, { threshold: 0.1 });
+
+         revealElements.forEach(el => observer.observe(el));
+      }
+
+      /* ================= PAGE SYNC ================= */
+      window.addEventListener("pageshow", () => {
+         cart = JSON.parse(localStorage.getItem("cart")) || [];
+         updateCart();
+         updateCartCount(); // 🔥 ensures navbar updates on Render
+      });
+
+      /* ================= INIT ================= */
+      document.addEventListener("DOMContentLoaded", () => {
+         updateCart();
+         updateCartCount();
+         setupCheckout();
+         setupReveal();
+
+         // Expose functions globally
+         window.increaseQty = increaseQty;
+         window.decreaseQty = decreaseQty;
+         window.removeItem = removeItem;
+         window.addToCart = addToCart;
+         window.toggleCart = toggleCart;
+      });
+   </script>
+
+
+
 
 
 
