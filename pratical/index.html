@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -292,7 +292,7 @@
          window.addEventListener("pageshow", () => {
             cart = JSON.parse(localStorage.getItem("cart")) || [];
             updateCart();
-           
+
 
          });
       });
@@ -318,7 +318,7 @@
 
          revealElements.forEach(el => observer.observe(el));
       });
-     
+
 
    </script>
    <script>
@@ -354,13 +354,21 @@
             countEl.textContent = count;
          }
       }
-      
 
+
+   </script>
+   <script>
+      function updateCartCount() {
+         let cart = JSON.parse(localStorage.getItem("cart")) || [];
+         document.getElementById("cart-count").textContent = cart.length;
+      }
+
+      document.addEventListener("DOMContentLoaded", updateCartCount);
    </script>
 
 
 
- 
+
 
 
 

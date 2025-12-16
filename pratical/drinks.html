@@ -101,12 +101,14 @@
 
                 saveCart();
                 updateCart();
+                updateCartcount()
             }
 
             function increaseQty(index) {
                 cart[index].quantity++;
                 saveCart();
                 updateCart();
+                updateCartcount()
             }
 
             function decreaseQty(index) {
@@ -118,16 +120,19 @@
 
                 saveCart();
                 updateCart();
+                updateCartcount()
             }
 
             function removeItem(index) {
                 cart.splice(index, 1);
                 saveCart();
                 updateCart();
+                updateCartcount()
             }
 
             function saveCart() {
                 localStorage.setItem('cart', JSON.stringify(cart));
+                updateCartcount()
             }
 
             function updateCart() {
