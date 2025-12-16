@@ -75,7 +75,7 @@
    color: #422801;
  }
 
- @media screen and (max-width: 768px) {
+ @media screen and (max-width: 600px) {
    .navbar {
      flex-direction: row;
      padding: 8px 15px;
