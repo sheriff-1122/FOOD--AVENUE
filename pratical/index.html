@@ -173,7 +173,7 @@
       <!-- Cart Header -->
       <div class="cart-header">
          <h2>Your Cart</h2>
-         <span class="close-cart" onclick="toggleCart()">✖</span>
+         <span class="close-cart" id="close-cart">✖</span>
       </div>
 
       <!-- Cart Items -->
@@ -192,11 +192,12 @@
 
    </div>
 
-
-
-   <!-- UPDATED JAVASCRIPT -->
    <script>
-      window.addEventListener("DOMContentLoaded", () => {
+      function toggleCart() {
+         document.getElementById("cartBox").classList.toggle("show");
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
          let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
          // Format numbers like ₦8,500
@@ -292,9 +293,26 @@
          window.addEventListener("pageshow", () => {
             cart = JSON.parse(localStorage.getItem("cart")) || [];
             updateCart();
-
-
          });
+
+         function updateCartCount() {
+            let count = 0;
+            cart.forEach(item => {
+               count += item.quantity;
+            });
+            const countEl = document.getElementById("cart-count");
+            if (countEl) {
+               countEl.textContent = count;
+            }
+         }
+
+         updateCartCount();
+
+         const cartIcon = document.getElementById('cart-icon');
+         cartIcon.addEventListener('click', toggleCart);
+
+         const closeCart = document.getElementById('close-cart');
+         closeCart.addEventListener('click', toggleCart);
       });
    </script>
    <script>
@@ -318,58 +336,7 @@
 
          revealElements.forEach(el => observer.observe(el));
       });
-
-
    </script>
-   <script>
-      function toggleCart() {
-         document.getElementById("cartBox").classList.toggle("show");
-      }
-
-      function updateCartCount() {
-         const cart = JSON.parse(localStorage.getItem("cart")) || [];
-         let count = 0;
-
-         cart.forEach(item => {
-            count += item.quantity;
-         });
-
-         document.getElementById("cart-count").textContent = count;
-      }
-      updateCartCount();
-
-   </script>
-
-   <script>
-      function updateCartCount() {
-         const cart = JSON.parse(localStorage.getItem("cart")) || [];
-         let count = 0;
-
-         cart.forEach(item => {
-            count += item.quantity;
-         });
-
-         const countEl = document.getElementById("cart-count");
-         if (countEl) {
-            countEl.textContent = count;
-         }
-      }
-
-
-   </script>
-   <script>
-      function updateCartCount() {
-         let cart = JSON.parse(localStorage.getItem("cart")) || [];
-         document.getElementById("cart-count").textContent = cart.length;
-      }
-
-      document.addEventListener("DOMContentLoaded", updateCartCount);
-   </script>
-
-
-
-
-
 
 
 
