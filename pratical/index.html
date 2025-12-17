@@ -4,7 +4,7 @@
 <head>
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>FOOD AVENUE 😉</title>
+   <title>FOOD AVENUE 8888😉</title>
    <link rel="stylesheet" href="style.css">
    <link rel="icon" type="image/png" href="images/Delicious Home Food (2).jpg">
 
@@ -173,7 +173,7 @@
       <!-- Cart Header -->
       <div class="cart-header">
          <h2>Your Cart</h2>
-         <span class="close-cart" id="close-cart">✖</span>
+         <span class="close-cart" onclick="toggleCart()">✖</span>
       </div>
 
       <!-- Cart Items -->
@@ -193,10 +193,6 @@
    </div>
 
    <script>
-      function toggleCart() {
-         document.getElementById("cartBox").classList.toggle("show");
-      }
-
       document.addEventListener("DOMContentLoaded", () => {
          let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
@@ -307,13 +303,12 @@
          }
 
          updateCartCount();
-
-         const cartIcon = document.getElementById('cart-icon');
-         cartIcon.addEventListener('click', toggleCart);
-
-         const closeCart = document.getElementById('close-cart');
-         closeCart.addEventListener('click', toggleCart);
       });
+   </script>
+   <script>
+      function toggleCart() {
+         document.getElementById("cartBox").classList.toggle("show");
+      }
    </script>
    <script>
       document.addEventListener("DOMContentLoaded", () => {
@@ -337,9 +332,6 @@
          revealElements.forEach(el => observer.observe(el));
       });
    </script>
-
-
-
 
 
 
