@@ -31,14 +31,14 @@
    background-color: #e65f05;
    height: 80px;
    width: 100%;
-   position:absolute;
+   position: fixed;
    top: 0;
    left: 0;
    z-index: 100;
    display: flex;
    justify-content: center;
    align-items: center;
-   padding: 10px 20px;
+   padding: 12px 25px;
    box-sizing: border-box;
  }
 
@@ -63,12 +63,16 @@
    margin: 0;
    padding: 0;
    font-size: 30px;
+
+   position: absolute;
+   left: 50%;
+   transform: translateX(-50%);
  }
 
  .navbar ul li a {
    color: white;
    text-decoration: none;
-   font-weight: bold;
+   font-weight: 600;
  }
 
  .navbar a:hover {
@@ -222,25 +226,27 @@
    transform: scale(0.97);
    transition: opacity 0.35s ease, transform 0.35s ease-out;
  }
+
  .food-section .text-part h1 a {
-  display: inline-block;
-  padding: 10px 16px;
-  border-radius: 12px;
+   display: inline-block;
+   padding: 10px 16px;
+   border-radius: 12px;
 
-  background: rgba(0, 0, 0, 0.12); /* subtle highlight */
-  color: #fff;
+   background: rgba(0, 0, 0, 0.12);
+   /* subtle highlight */
+   color: #fff;
 
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 1.5rem;
+   text-decoration: none;
+   font-weight: 600;
+   font-size: 1.5rem;
 
-  transition: background 0.25s ease;
-}
+   transition: background 0.25s ease;
+ }
 
-/* Hover / tap feedback */
-.food-section:hover .text-part h1 a {
-  background: rgba(0, 0, 0, 0.25);
-}
+ /* Hover / tap feedback */
+ .food-section:hover .text-part h1 a {
+   background: rgba(0, 0, 0, 0.25);
+ }
 
  .food-section.show {
    opacity: 1;
@@ -310,18 +316,25 @@
  .cart-box {
    position: fixed;
    top: 80px;
-   right: 20px;
+   right: -260px;
+   /* hidden offscreen */
    width: 240px;
-   background-color:#f0c6a8;
+   background-color: #f0c6a8;
    border-radius: 22px;
    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
-   display: none;
    z-index: 999;
-
    max-height: 75vh;
-   overflow: hidden;
-   animation: cartPop 0.35s ease;
+   overflow-y: auto;
+   transition: right 0.35s ease;
+   /* smooth slide */
  }
+
+ /* OPEN STATE */
+ .cart-box.open {
+   right: 20px;
+   /* visible on screen */
+ }
+
 
  /* Header */
  .cart-header {
@@ -396,18 +409,18 @@
  }
 
 
- .cart-box.show {
-   display: block;
- }
-
  .nav-cart {
+   display: flex;
+   z-index: 1100;
+   gap: 6px;
+   margin-left: auto;
+   font-size: 1.4rem;
    cursor: pointer;
-   font-size: 22px;
-   color: white;
-   position: relative;
-
-
+   color: #fff;
+   font-weight: bold;
+   z-index: 1100;
  }
+
 
  #cart-count {
    background: red;
@@ -424,6 +437,13 @@
    .food-section,
    .cart-box {
      transition: opacity 0.25s ease-out, transform 0.25s ease-out;
+   }
+
+   .navbar ul {
+     position: static;
+     transform: none;
+     margin: 0 auto;
+
    }
  }
 

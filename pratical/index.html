@@ -194,6 +194,7 @@
 
    <script>
       document.addEventListener("DOMContentLoaded", () => {
+         // ==== CART SETUP ====
          let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
          // Format numbers like ₦8,500
@@ -201,6 +202,7 @@
             return amount.toLocaleString("en-NG");
          }
 
+         // Increase quantity
          function increaseQty(index) {
             cart[index].quantity++;
             saveCart();
@@ -208,6 +210,7 @@
             updateCartCount();
          }
 
+         // Decrease quantity
          function decreaseQty(index) {
             cart[index].quantity--;
             if (cart[index].quantity <= 0) {
@@ -218,6 +221,7 @@
             updateCartCount();
          }
 
+         // Remove item
          function removeItem(index) {
             cart.splice(index, 1);
             saveCart();
@@ -225,15 +229,19 @@
             updateCartCount();
          }
 
+         // Save cart to localStorage
          function saveCart() {
             localStorage.setItem("cart", JSON.stringify(cart));
             updateCartCount();
          }
 
+         // Update cart HTML
          function updateCart() {
             const cartList = document.getElementById("cart-items");
             const totalSpan = document.getElementById("cart-total");
             const cartMessage = document.getElementById("cart-message");
+
+            if (!cartList || !totalSpan || !cartMessage) return;
 
             cartList.innerHTML = "";
             let total = 0;
@@ -242,21 +250,21 @@
                total += item.amount * item.quantity;
 
                cartList.innerHTML += `
-                  <li class="cart-row">
-                     <div class="cart-info">
-                        <span class="cart-name">${item.food}</span>
-                        <span class="cart-price">₦${formatNaira(item.amount)}</span>
-                     </div>
+            <li class="cart-row">
+               <div class="cart-info">
+                  <span class="cart-name">${item.food}</span>
+                  <span class="cart-price">₦${formatNaira(item.amount)}</span>
+               </div>
 
-                     <div class="cart-controls">
-                        <button class="qty-btn" onclick="decreaseQty(${index})">−</button>
-                        <span class="qty">${item.quantity}</span>
-                        <button class="qty-btn" onclick="increaseQty(${index})">+</button>
-                     </div>
+               <div class="cart-controls">
+                  <button class="qty-btn" onclick="decreaseQty(${index})">−</button>
+                  <span class="qty">${item.quantity}</span>
+                  <button class="qty-btn" onclick="increaseQty(${index})">+</button>
+               </div>
 
-                     <button class="remove-btn" onclick="removeItem(${index})">Remove</button>
-                  </li>
-               `;
+               <button class="remove-btn" onclick="removeItem(${index})">Remove</button>
+            </li>
+         `;
             });
 
             totalSpan.textContent = formatNaira(total);
@@ -266,72 +274,70 @@
             }
          }
 
-         // Make functions accessible
+         // Update cart count
+         function updateCartCount() {
+            let count = 0;
+            cart.forEach(item => { count += item.quantity; });
+            const countEl = document.getElementById("cart-count");
+            if (countEl) countEl.textContent = count;
+         }
+
+         // Expose functions globally for buttons inside cart
          window.increaseQty = increaseQty;
          window.decreaseQty = decreaseQty;
          window.removeItem = removeItem;
 
-         // Render the cart
+         // Render cart initially
          updateCart();
+         updateCartCount();
 
+         // Checkout button logic
          const checkoutBtn = document.getElementById("checkoutBtn");
          const cartMessage = document.getElementById("cart-message");
 
-         checkoutBtn.addEventListener("click", () => {
-            if (cart.length === 0) {
-               cartMessage.textContent = "Your cart is empty. Add items to your cart!";
-               return;
-            }
-            window.location.href = "checkout.html";
-         });
+         if (checkoutBtn) {
+            checkoutBtn.addEventListener("click", () => {
+               if (cart.length === 0) {
+                  cartMessage.textContent = "Your cart is empty. Add items to your cart!";
+                  return;
+               }
+               window.location.href = "checkout.html";
+            });
+         }
 
-         // When returning from checkout
+         // Restore cart when returning from checkout
          window.addEventListener("pageshow", () => {
             cart = JSON.parse(localStorage.getItem("cart")) || [];
             updateCart();
          });
 
-         function updateCartCount() {
-            let count = 0;
-            cart.forEach(item => {
-               count += item.quantity;
+         // ==== CART TOGGLE ====
+         const cartIcon = document.querySelector(".nav-cart");
+         const cartBox = document.getElementById("cartBox");
+
+         if (cartIcon && cartBox) {
+            cartIcon.addEventListener("click", () => {
+               cartBox.classList.toggle("open"); // must match CSS
             });
-            const countEl = document.getElementById("cart-count");
-            if (countEl) {
-               countEl.textContent = count;
-            }
          }
 
-         updateCartCount();
-      });
-   </script>
-   <script>
-      function toggleCart() {
-         document.getElementById("cartBox").classList.toggle("show");
-      }
-   </script>
-   <script>
-      document.addEventListener("DOMContentLoaded", () => {
-         // select both food sections AND cart box
+         // ==== FOOD SECTION OBSERVER ====
          const revealElements = document.querySelectorAll(".food-section");
-
-
          const observer = new IntersectionObserver(
-            (entries) => {
+            entries => {
                entries.forEach(entry => {
                   if (entry.isIntersecting) {
                      entry.target.classList.add("show");
                   }
                });
             },
-            {
-               threshold: 0.1 // triggers immediately when a tiny part of element is visible
-            }
+            { threshold: 0.1 }
          );
 
          revealElements.forEach(el => observer.observe(el));
       });
    </script>
+
 
 
 </body>
