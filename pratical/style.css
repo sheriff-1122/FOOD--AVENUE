@@ -222,6 +222,25 @@
    transform: scale(0.97);
    transition: opacity 0.35s ease, transform 0.35s ease-out;
  }
+ .food-section .text-part h1 a {
+  display: inline-block;
+  padding: 10px 16px;
+  border-radius: 12px;
+
+  background: rgba(0, 0, 0, 0.12); /* subtle highlight */
+  color: #fff;
+
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.5rem;
+
+  transition: background 0.25s ease;
+}
+
+/* Hover / tap feedback */
+.food-section:hover .text-part h1 a {
+  background: rgba(0, 0, 0, 0.25);
+}
 
  .food-section.show {
    opacity: 1;
