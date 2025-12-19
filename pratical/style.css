@@ -31,7 +31,7 @@
    background-color: #e65f05;
    height: 80px;
    width: 100%;
-   position:fixed;
+   position:absolute;
    top: 0;
    left: 0;
    z-index: 100;
@@ -59,7 +59,7 @@
  .navbar ul {
    list-style: none;
    display: flex;
-   gap: 25px;
+   gap: 70px;
    margin: 0;
    padding: 0;
    font-size: 30px;
@@ -312,7 +312,7 @@
    top: 80px;
    right: 20px;
    width: 240px;
-   background-color: #ff8c42;
+   background-color:#f0c6a8;
    border-radius: 22px;
    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
    display: none;
