@@ -525,9 +525,9 @@
  }
 
  .remove-btn:hover {
-   background-color: darkred;
+  color: #FFFDD0;
  }
-
+ 
  #checkoutBtn {
    background:#8B4513;
    color: blanchedalmond;
@@ -538,7 +538,7 @@
  }
 
  #checkoutBtn:hover {
-   background: #2b1a01;
+   background:#2b1a01;
  }
 
  /* --- BUTTONS --- */
